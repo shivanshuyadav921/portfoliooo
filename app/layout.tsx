@@ -5,9 +5,9 @@ const siteUrl = new URL('https://shivanshuyadav.dev');
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
-  title: 'Shivanshu Yadav | Software Engineer | AI Researcher',
+  title: 'Shivanshu Yadav | Making Intelligence Understandable',
   description:
-    'Computer Science student at VIT Vellore specializing in software engineering, multilingual NLP research, explainable AI, and retrieval-augmented generation systems.',
+    'Editorial portfolio for Shivanshu Yadav, a Software Engineer and AI Researcher focused on explainable systems, multilingual NLP, and trustworthy retrieval.',
   keywords: [
     'Shivanshu Yadav',
     'Software Engineer',
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'Shivanshu Yadav' }],
   creator: 'Shivanshu Yadav',
   openGraph: {
-    title: 'Shivanshu Yadav | Software Engineer | AI Researcher',
+    title: 'Shivanshu Yadav | Making Intelligence Understandable',
     description:
-      'Computer Science student at VIT Vellore specializing in software engineering, multilingual NLP research, explainable AI, and retrieval-augmented generation systems.',
+      'Editorial portfolio for Shivanshu Yadav, a Software Engineer and AI Researcher focused on explainable systems, multilingual NLP, and trustworthy retrieval.',
     url: siteUrl.toString(),
     type: 'website',
     siteName: 'Shivanshu Yadav Portfolio',
@@ -31,9 +31,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary',
-    title: 'Shivanshu Yadav | Software Engineer | AI Researcher',
+    title: 'Shivanshu Yadav | Making Intelligence Understandable',
     description:
-      'Computer Science student at VIT Vellore specializing in software engineering, multilingual NLP research, explainable AI, and retrieval-augmented generation systems.',
+      'Editorial portfolio for Shivanshu Yadav, a Software Engineer and AI Researcher focused on explainable systems, multilingual NLP, and trustworthy retrieval.',
   },
   robots: {
     index: true,

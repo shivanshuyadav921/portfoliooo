@@ -16,10 +16,10 @@ export function SectionReveal({ children, className }: SectionRevealProps) {
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }}
+      initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.08 }}
-      transition={{ duration: reduceMotion ? 0 : 0.72, ease }}
+      transition={{ duration: reduceMotion ? 0 : 0.45, ease }}
     >
       {children}
     </motion.div>

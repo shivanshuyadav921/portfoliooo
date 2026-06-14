@@ -1,48 +1,88 @@
-import { motion } from 'framer-motion';
+'use client';
+
+import { motion, useReducedMotion } from 'framer-motion';
 import { journeyTimeline } from '@/data/timeline';
-import { TimelineCard } from '@/components/timeline-card';
+
+const ease = [0.22, 1, 0.36, 1] as const;
 
 export function JourneySection() {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <section id="journey" className="scroll-mt-24 border-t border-slate-800/80 py-24">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+    <section id="journey" className="scroll-mt-24 border-t border-white/[0.08] py-24 sm:py-32">
+      <div className="mx-auto max-w-[92rem] px-4 sm:px-8 lg:px-12">
         <motion.div
-          initial={{ opacity: 0, y: 28 }}
+          initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="mb-10 max-w-3xl"
+          viewport={{ once: true, amount: 0.28 }}
+          transition={{ duration: reduceMotion ? 0 : 0.45, ease }}
+          className="grid gap-8 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-end"
         >
-          <p className="text-sm uppercase tracking-[0.28em] text-cyan-300/70">Journey</p>
-          <h2 className="editorial-serif mt-4 text-4xl font-semibold tracking-normal text-white sm:text-5xl">
-            A timeline of engineering judgment, research curiosity, and continuous learning.
-          </h2>
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-cyan-200/70">Journey</p>
+            <h2 className="editorial-serif mt-5 max-w-3xl text-5xl font-semibold tracking-tight text-white sm:text-6xl">
+              A timeline of judgment.
+            </h2>
+          </div>
+          <p className="max-w-xl text-base leading-8 text-slate-300 lg:justify-self-end">
+            The timeline stays intentionally spare. It shows how education, research, and project work are starting
+            to converge into a single practice of building serious systems.
+          </p>
         </motion.div>
 
-        <div className="space-y-16">
+        <div className="mt-14 space-y-12">
           {journeyTimeline.map((section, sectionIndex) => (
-            <div key={section.sectionTitle} className="space-y-8">
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.8, delay: sectionIndex * 0.05 }}
-                className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-center"
-              >
-                <div className="rounded-[2rem] border border-slate-800/90 bg-slate-950/80 p-7 shadow-[0_0_0_1px_rgba(148,163,184,0.06)]">
-                  <p className="text-sm uppercase tracking-[0.28em] text-cyan-300/70">{section.sectionTitle}</p>
-                  <p className="mt-4 text-lg leading-8 text-slate-300">{section.sectionRole}</p>
-                </div>
-                <div className="space-y-6">
-                  {section.entries.map((entry, entryIndex) => (
-                    <div key={entry.id} className="relative">
-                      <div className="absolute left-0 top-4 h-10 w-0.5 bg-cyan-500/30" />
-                      <TimelineCard entry={entry} index={entryIndex} />
+            <motion.div
+              key={section.sectionTitle}
+              initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.22 }}
+              transition={{ duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : sectionIndex * 0.04, ease }}
+              className="grid gap-8 lg:grid-cols-[minmax(0,0.34fr)_minmax(0,0.66fr)] lg:gap-12"
+            >
+              <div className="border-t border-white/[0.08] pt-5">
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{section.sectionTitle}</p>
+                {section.sectionRole ? (
+                  <p className="mt-4 max-w-md text-base leading-8 text-slate-300">{section.sectionRole}</p>
+                ) : null}
+              </div>
+
+              <div className="space-y-8">
+                {section.entries.map((entry) => (
+                  <article key={entry.id} className="border-t border-white/[0.08] pt-5">
+                    <div className="flex flex-wrap items-start justify-between gap-4">
+                      <div>
+                        <p className="text-[0.62rem] uppercase tracking-[0.28em] text-cyan-200/70">{entry.period}</p>
+                        <h3 className="editorial-serif mt-3 text-3xl font-semibold tracking-tight text-white">
+                          {entry.title}
+                        </h3>
+                        {entry.role ? <p className="mt-3 text-sm text-slate-400">{entry.role}</p> : null}
+                      </div>
+                      {entry.tags ? (
+                        <div className="flex flex-wrap gap-2">
+                          {entry.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="rounded-full border border-slate-800/90 bg-slate-900/35 px-3 py-1.5 text-xs text-slate-300"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      ) : null}
                     </div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
+
+                    <div className="mt-5 space-y-3">
+                      {entry.details.map((detail) => (
+                        <p key={detail} className="max-w-3xl text-sm leading-7 text-slate-300">
+                          {detail}
+                        </p>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>

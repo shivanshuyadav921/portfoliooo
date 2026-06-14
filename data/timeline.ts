@@ -18,17 +18,16 @@ export type JourneySection = {
 export const journeyTimeline: JourneySection[] = [
   {
     sectionTitle: 'Education',
-    sectionRole: 'Academic foundation and coursework in data science and software engineering.',
+    sectionRole: 'Formal study in computer science and data science, shaped around systems thinking and implementation.',
     entries: [
       {
         id: 'vit-2024',
-        title: 'Vellore Institute of Technology (VIT), Vellore',
+        title: 'Vellore Institute of Technology, Vellore',
         role: 'B.Tech in Computer Science and Engineering (Data Science)',
         period: 'Aug 2024 - May 2028',
         details: [
-          'Pursuing undergraduate studies focused on software engineering and data science.',
-          'Coursework includes Data Structures & Algorithms, DBMS, Operating Systems, Computer Networks, Probability & Statistics, and System Design.',
-          'Developing expertise through both academic coursework and independent research.',
+          'Coursework spans data structures, databases, operating systems, computer networks, probability, and system design.',
+          'The degree has become a lens for balancing algorithms, product delivery, and research rigor.',
           'Current CGPA: 7.87 / 10.',
         ],
         tags: ['CSDS', 'Systems', 'AI'],
@@ -36,35 +35,35 @@ export const journeyTimeline: JourneySection[] = [
     ],
   },
   {
-    sectionTitle: 'Research Experience',
-    sectionRole: 'Independent and guided research exploring interpretability and multilingual intelligence.',
+    sectionTitle: 'Research',
+    sectionRole: 'Independent work on interpretability, multilingual reliability, and the shape of evidence in language systems.',
     entries: [
       {
         id: 'undergrad-research',
         title: 'Undergraduate Researcher',
         period: '2025 - Present',
         details: [
-          'Conducted independent research in multilingual trustworthiness evaluation.',
-          'Designed explainable RAG frameworks with evidence attribution.',
-          'Investigated formal methods for syntax-to-semantics conversion.',
-          'Published and maintained preprints documenting research findings.',
+          'Studied hallucination behavior in multilingual language models.',
+          'Designed explainable retrieval methods that surface evidence alongside answers.',
+          'Explored syntax-to-semantics methods with traceable intermediate structure.',
+          'Maintained preprints and publication records as the work evolved.',
         ],
         tags: ['XAI', 'RAG', 'NLP'],
       },
     ],
   },
   {
-    sectionTitle: 'Project Milestones',
-    sectionRole: 'Engineered product-grade systems that connect research with real-world experiences.',
+    sectionTitle: 'Projects',
+    sectionRole: 'Production-minded systems where engineering choices had to serve both users and maintainers.',
     entries: [
       {
         id: 'flowint-2025',
-        title: 'Flowint Development',
+        title: 'Flowint',
         period: '2025',
         details: [
-          'Designed a production-grade AI interview preparation platform.',
-          'Integrated multiple large language model providers.',
-          'Implemented retrieval systems and Docker-based deployments.',
+          'Built a retrieval-grounded interview preparation platform.',
+          'Integrated model providers behind a secure backend boundary.',
+          'Shipped a containerized workflow for reproducible use.',
         ],
         tags: ['LLM', 'Docker', 'RAG'],
       },
@@ -73,39 +72,11 @@ export const journeyTimeline: JourneySection[] = [
         title: 'Research Expansion',
         period: '2025 - 2026',
         details: [
-          'Expanded into multilingual hallucination research.',
-          'Explored trustworthiness challenges in Hindi and Punjabi LLMs.',
-          'Developed explainability-driven evaluation methodologies.',
+          'Expanded into multilingual hallucination evaluation.',
+          'Documented trustworthiness gaps in Hindi and Punjabi LLMs.',
+          'Kept the work focused on transparency rather than score-chasing.',
         ],
         tags: ['Multilingual', 'Hallucination', 'Trust'],
-      },
-    ],
-  },
-  {
-    sectionTitle: 'Achievement Timeline',
-    sectionRole: 'Competitive programming and hackathon experience that sharpened rapid problem solving.',
-    entries: [
-      {
-        id: 'competitive-programming',
-        title: 'Competitive Programming',
-        period: 'Ongoing',
-        details: [
-          'Solved 100+ problems across LeetCode and HackerRank.',
-          'Strengthened problem-solving and algorithmic thinking skills.',
-        ],
-        tags: ['LeetCode', 'HackerRank'],
-      },
-      {
-        id: 'hackathons',
-        title: 'Hackathon Participation',
-        role: 'Samsung EnnovateX, Amazon Hackathon, Goldman Sachs Hackathon',
-        period: '2025 - Present',
-        details: [
-          'Designed and presented prototypes under strict time constraints.',
-          'Collaborated within multidisciplinary teams.',
-          'Gained experience in rapid product development.',
-        ],
-        tags: ['Teamwork', 'Product', 'Pitching'],
       },
     ],
   },

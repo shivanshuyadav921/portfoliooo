@@ -38,9 +38,9 @@ export function HeroSection() {
 
           <h1
             id="hero-heading"
-            className="display-headline editorial-balance max-w-5xl text-white"
+            className="display-headline editorial-balance editorial-serif max-w-5xl text-white"
           >
-            {['Engineering', 'systems.'].map((line, index) => (
+            {['Engineering', 'Trustworthy'].map((line, index) => (
               <motion.span
                 key={line}
                 initial={{ opacity: 0, y: 48 }}
@@ -57,7 +57,7 @@ export function HeroSection() {
               transition={{ duration: 0.9, delay: 0.28, ease }}
               className="mt-2 block font-light italic text-cyan-200"
             >
-              Researching trust.
+              Intelligence.
             </motion.span>
           </h1>
 
@@ -68,8 +68,8 @@ export function HeroSection() {
             className="mt-10 grid max-w-4xl gap-8 md:grid-cols-[1fr_auto] md:items-end"
           >
             <p className="max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
-              I build production software and investigate how language systems can become more
-              explainable, multilingual, and reliable.
+              I build production software and investigate how language systems become more
+              explainable, multilingual, reliable, and useful to people.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row md:flex-col">
               <a

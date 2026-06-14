@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight, BookOpen, Fingerprint, FlaskConical } from 'lucide-react';
+import Image from 'next/image';
 
 type ResearchItem = {
   title: string;
@@ -65,7 +66,7 @@ export function ResearchSection() {
         >
           <div>
             <p className="font-mono text-xs text-cyan-300/70">02 / RESEARCH</p>
-            <h2 className="mt-5 text-5xl font-semibold tracking-[-0.045em] text-white sm:text-6xl">
+            <h2 className="editorial-serif mt-5 text-5xl font-semibold tracking-normal text-white sm:text-6xl">
               Evidence over
               <span className="block text-slate-500">black boxes.</span>
             </h2>
@@ -111,6 +112,26 @@ export function ResearchSection() {
               ) : null}
               <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
                 <div className="space-y-6 p-7 sm:p-8">
+                  {index === 0 ? (
+                    <div className="research-pathways relative -mx-2 mb-2 overflow-hidden rounded-[1.4rem] border border-cyan-200/10 bg-slate-950">
+                      <Image
+                        src="/story/interpretable-ai-pathways.png"
+                        alt="Editorial visualization of interpretable AI pathways converging and branching through semantic reasoning traces."
+                        width={1024}
+                        height={576}
+                        sizes="(min-width: 1024px) 54vw, 100vw"
+                        priority={false}
+                        className="aspect-[16/9] w-full object-cover opacity-90"
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0,rgba(2,6,23,0.18)_42%,rgba(2,6,23,0.82)_100%)]" />
+                      <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-3">
+                        <span className="rounded-full border border-cyan-200/15 bg-slate-950/75 px-3 py-1.5 text-[0.62rem] uppercase tracking-[0.22em] text-cyan-100 backdrop-blur">
+                          Semantic trace map
+                        </span>
+                        <span className="text-xs text-slate-300">Interpretability as a design material</span>
+                      </div>
+                    </div>
+                  ) : null}
                   <div className="flex flex-col gap-3">
                     <div className="flex flex-wrap items-center justify-between gap-3">
                       <p className="text-xs uppercase tracking-[0.26em] text-cyan-300/75">{item.status}</p>
@@ -120,7 +141,7 @@ export function ResearchSection() {
                         </span>
                       ) : null}
                     </div>
-                    <h3 className={`${index === 0 ? 'text-3xl sm:text-4xl' : 'text-2xl'} font-semibold tracking-[-0.025em] text-white`}>
+                    <h3 className={`${index === 0 ? 'text-3xl sm:text-4xl' : 'text-2xl'} editorial-serif font-semibold tracking-normal text-white`}>
                       {item.title}
                     </h3>
                     {item.authors ? <p className="text-sm font-medium text-slate-200">{item.authors}</p> : null}

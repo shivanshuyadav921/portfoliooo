@@ -1,8 +1,5 @@
 'use client';
 
-import { AboutSection } from '@/components/about-section';
-import { AchievementsSection } from '@/components/achievements-section';
-import { CodingProfilesSection } from '@/components/coding-profiles-section';
 import { ContactSection } from '@/components/contact-section';
 import { FeaturedProjectsSection } from '@/components/featured-projects-section';
 import { Footer } from '@/components/footer';
@@ -10,14 +7,12 @@ import { HeroSection } from '@/components/hero-section';
 import { JourneySection } from '@/components/journey-section';
 import { ResearchSection } from '@/components/research-section';
 import { SectionReveal } from '@/components/section-reveal';
-import { SkillsSection } from '@/components/skills-section';
 import { Download } from 'lucide-react';
 
 const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
+  { label: 'Work', href: '#projects' },
   { label: 'Research', href: '#research' },
-  { label: 'Skills', href: '#skills' },
+  { label: 'Journey', href: '#journey' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -36,7 +31,7 @@ export function PortfolioPage() {
           aria-label="Primary navigation"
           className="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-5 px-4 sm:px-8 lg:px-12"
         >
-          <a href="#home" className="group flex shrink-0 items-center gap-3 font-semibold tracking-tight text-white">
+          <a href="#home" className="group flex shrink-0 items-center gap-3 font-semibold tracking-normal text-white">
             <span className="flex h-8 w-8 items-center justify-center rounded-full border border-cyan-300/20 bg-cyan-300/[0.07] text-xs text-cyan-200 transition group-hover:border-cyan-300/50">
               SY
             </span>
@@ -47,9 +42,7 @@ export function PortfolioPage() {
               <a
                 key={link.href}
                 href={link.href}
-                className={`min-h-11 shrink-0 items-center rounded-full px-3 text-sm text-slate-300 transition hover:bg-slate-900 hover:text-cyan-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 ${
-                  link.label === 'Projects' || link.label === 'Research' ? 'inline-flex' : 'hidden sm:inline-flex'
-                }`}
+                className="inline-flex min-h-11 shrink-0 items-center rounded-full px-3 text-sm text-slate-300 transition hover:bg-slate-900 hover:text-cyan-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
               >
                 {link.label}
               </a>
@@ -74,20 +67,14 @@ export function PortfolioPage() {
           </div>
         </div>
         <SectionReveal>
-          <AboutSection />
-        </SectionReveal>
-        <SectionReveal>
           <FeaturedProjectsSection />
         </SectionReveal>
         <SectionReveal>
           <ResearchSection />
         </SectionReveal>
-        <SkillsSection />
         <SectionReveal>
           <JourneySection />
         </SectionReveal>
-        <AchievementsSection />
-        <CodingProfilesSection />
         <SectionReveal>
           <ContactSection />
         </SectionReveal>

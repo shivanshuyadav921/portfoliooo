@@ -14,8 +14,8 @@ export function JourneySection() {
           className="mb-10 max-w-3xl"
         >
           <p className="text-sm uppercase tracking-[0.28em] text-cyan-300/70">Journey</p>
-          <h2 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-            A timeline of growth through engineering, research, and continuous learning.
+          <h2 className="editorial-serif mt-4 text-4xl font-semibold tracking-normal text-white sm:text-5xl">
+            A timeline of engineering judgment, research curiosity, and continuous learning.
           </h2>
         </motion.div>
 

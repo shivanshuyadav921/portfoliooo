@@ -38,7 +38,7 @@ export function AboutSection() {
           className="mb-10 max-w-3xl"
         >
           <p className="text-sm uppercase tracking-[0.28em] text-cyan-300/70">About Me</p>
-          <h2 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+          <h2 className="editorial-serif mt-4 text-4xl font-semibold tracking-normal text-white sm:text-5xl">
             Building reliable software and trustworthy AI systems.
           </h2>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">

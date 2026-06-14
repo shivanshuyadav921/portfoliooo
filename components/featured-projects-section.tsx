@@ -1,7 +1,6 @@
 import { ProjectShowcase } from '@/components/project-showcase';
 import { featuredProjects } from '@/data/projects';
 import { motion } from 'framer-motion';
-import { StaggerChildren } from '@/components/stagger-children';
 
 export function FeaturedProjectsSection() {
   return (
@@ -16,21 +15,21 @@ export function FeaturedProjectsSection() {
         >
           <div>
             <p className="font-mono text-xs text-cyan-300/70">01 / SELECTED WORK</p>
-            <h2 className="mt-5 text-5xl font-semibold tracking-[-0.045em] text-white sm:text-6xl">
+            <h2 className="editorial-serif mt-5 text-5xl font-semibold tracking-normal text-white sm:text-6xl">
               Built to solve,
               <span className="block text-slate-500">not just to ship.</span>
             </h2>
           </div>
           <p className="max-w-xl text-base leading-8 text-slate-300 lg:justify-self-end">
-            A selection of systems where product thinking, technical architecture, and measurable outcomes meet.
+            Scroll through each project as a short case study: the problem, the system shape, the tradeoffs, and the proof.
           </p>
         </motion.div>
+      </div>
 
-        <StaggerChildren className="space-y-10">
-          {featuredProjects.map((project, index) => (
-            <ProjectShowcase key={project.title} project={project} reverse={index % 2 !== 0} index={index} />
-          ))}
-        </StaggerChildren>
+      <div className="mt-4">
+        {featuredProjects.map((project, index) => (
+          <ProjectShowcase key={project.title} project={project} index={index} />
+        ))}
       </div>
     </section>
   );

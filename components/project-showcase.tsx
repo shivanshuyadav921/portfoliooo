@@ -1,133 +1,62 @@
-import { ArrowUpRight, Camera, Check, GitBranch, Play, ScanLine } from 'lucide-react';
+'use client';
+
+import { useRef, useState } from 'react';
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from 'framer-motion';
+import Image from 'next/image';
+import { ArrowUpRight, Check, GitBranch, Layers3, Target, Wrench } from 'lucide-react';
 import { ProjectButton, ProjectItem } from '@/data/projects';
 
 type ProjectShowcaseProps = {
   project: ProjectItem;
-  reverse?: boolean;
   index: number;
 };
 
-function PipelineVisual() {
-  const stages = [
-    ['01', 'Resume', 'Parsed context'],
-    ['02', 'Retrieval', 'Grounded evidence'],
-    ['03', 'LLM router', 'Provider fallback'],
-    ['04', 'Evaluation', 'Actionable feedback'],
+type NarrativeState = {
+  label: 'Challenge' | 'Architecture' | 'Engineering Decisions' | 'Impact';
+  eyebrow: string;
+  body: string;
+  points: string[];
+  icon: typeof Target;
+};
+
+function getNarrativeStates(project: ProjectItem): NarrativeState[] {
+  return [
+    {
+      label: 'Challenge',
+      eyebrow: 'What needed to become clear',
+      body: project.challenge,
+      points: [project.description],
+      icon: Target,
+    },
+    {
+      label: 'Architecture',
+      eyebrow: 'How the system is shaped',
+      body: project.architecture,
+      points: project.technologies.slice(0, 5),
+      icon: Layers3,
+    },
+    {
+      label: 'Engineering Decisions',
+      eyebrow: 'Where judgment shows up',
+      body: project.decision,
+      points: project.highlights.slice(0, 4),
+      icon: Wrench,
+    },
+    {
+      label: 'Impact',
+      eyebrow: 'What the work proves',
+      body: project.proof,
+      points: project.impact,
+      icon: Check,
+    },
   ];
-
-  return (
-    <div className="grid min-h-[24rem] gap-5 bg-[#050c17] p-5 sm:p-7">
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-[0.65rem] uppercase tracking-[0.22em] text-slate-500">Request lifecycle</p>
-          <p className="mt-2 text-xl font-medium text-white">Personalized interview pipeline</p>
-        </div>
-        <GitBranch className="h-5 w-5 text-cyan-300" aria-hidden="true" />
-      </div>
-      <div className="grid gap-3">
-        {stages.map(([step, title, detail], stageIndex) => (
-          <div
-            key={title}
-            className="relative grid grid-cols-[2.5rem_1fr_auto] items-center gap-3 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-4"
-          >
-            {stageIndex < stages.length - 1 ? (
-              <span className="absolute -bottom-4 left-[2.15rem] h-4 w-px bg-cyan-300/25" />
-            ) : null}
-            <span className="font-mono text-xs text-cyan-300/70">{step}</span>
-            <div>
-              <p className="text-sm font-medium text-slate-100">{title}</p>
-              <p className="mt-1 text-xs text-slate-500">{detail}</p>
-            </div>
-            <Check className="h-4 w-4 text-emerald-300/80" aria-hidden="true" />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function AlgorithmVisual() {
-  const bars = [42, 78, 54, 92, 65, 34, 84];
-
-  return (
-    <div className="flex min-h-[24rem] flex-col bg-[#050c17] p-5 sm:p-7">
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-[0.65rem] uppercase tracking-[0.22em] text-slate-500">Merge sort / pass 04</p>
-          <p className="mt-2 text-xl font-medium text-white">State-by-state explanation</p>
-        </div>
-        <span className="rounded-full border border-cyan-300/20 bg-cyan-300/[0.06] px-3 py-1 text-xs text-cyan-100">
-          O(n log n)
-        </span>
-      </div>
-      <div className="mt-8 flex flex-1 items-end gap-2 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
-        {bars.map((height, barIndex) => (
-          <div key={`${height}-${barIndex}`} className="flex h-full flex-1 items-end">
-            <div
-              className={`w-full rounded-t transition-colors ${
-                barIndex === 3 || barIndex === 4
-                  ? 'bg-gradient-to-t from-cyan-500/35 to-cyan-200'
-                  : 'bg-slate-700'
-              }`}
-              style={{ height: `${height}%` }}
-            />
-          </div>
-        ))}
-      </div>
-      <div className="mt-4 flex items-center gap-3">
-        <span
-          aria-hidden="true"
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-950"
-        >
-          <Play className="h-4 w-4 fill-current" aria-hidden="true" />
-        </span>
-        <div className="h-1 flex-1 overflow-hidden rounded-full bg-slate-800">
-          <div className="h-full w-[58%] rounded-full bg-cyan-300" />
-        </div>
-        <span className="font-mono text-xs text-slate-500">04 / 07</span>
-      </div>
-    </div>
-  );
-}
-
-function VisionVisual() {
-  return (
-    <div className="grid min-h-[24rem] gap-4 bg-[#050c17] p-5 sm:grid-cols-[1fr_0.58fr] sm:p-7">
-      <div className="relative flex min-h-72 items-center justify-center overflow-hidden rounded-2xl border border-white/[0.07] bg-[radial-gradient(circle_at_center,_rgba(34,211,238,0.12),_transparent_55%)]">
-        <span className="absolute left-4 top-4 inline-flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.2em] text-cyan-200">
-          <Camera className="h-3.5 w-3.5" aria-hidden="true" />
-          Live frame
-        </span>
-        <div className="relative flex h-40 w-32 items-center justify-center rounded-[2.5rem_2.5rem_1.5rem_1.5rem] border border-cyan-200/45 bg-cyan-300/[0.05]">
-          <ScanLine className="h-12 w-12 text-cyan-200/70" aria-hidden="true" />
-          <span className="absolute -inset-5 rounded-[3rem] border border-dashed border-cyan-300/20" />
-        </div>
-        <span className="absolute bottom-4 right-4 rounded-full border border-emerald-300/20 bg-emerald-300/[0.07] px-3 py-1 text-xs text-emerald-200">
-          Tracking
-        </span>
-      </div>
-      <div className="flex flex-col justify-between gap-4">
-        <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5">
-          <p className="text-[0.65rem] uppercase tracking-[0.22em] text-slate-500">Prediction</p>
-          <p className="mt-3 text-6xl font-semibold tracking-[-0.06em] text-white">A</p>
-          <p className="mt-2 text-sm text-cyan-200">93.2% confidence</p>
-        </div>
-        <div className="space-y-3 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5">
-          {[93, 71, 46].map((confidence, index) => (
-            <div key={confidence}>
-              <div className="mb-1 flex justify-between text-xs text-slate-500">
-                <span>{String.fromCharCode(65 + index)}</span>
-                <span>{confidence}%</span>
-              </div>
-              <div className="h-1 rounded-full bg-slate-800">
-                <div className="h-full rounded-full bg-cyan-300/80" style={{ width: `${confidence}%` }} />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
 }
 
 function GraphVisual() {
@@ -174,25 +103,32 @@ function GraphVisual() {
   );
 }
 
-function ProjectVisual({ project }: { project: ProjectItem }) {
-  const visuals = {
-    pipeline: <PipelineVisual />,
-    algorithm: <AlgorithmVisual />,
-    vision: <VisionVisual />,
-    graph: <GraphVisual />,
-  };
-
+function ProjectMedia({ project }: { project: ProjectItem }) {
   return (
-    <div className="relative overflow-hidden rounded-[1.4rem] border border-white/[0.07] bg-slate-950/90">
-      <div className="flex items-center gap-2 border-b border-white/[0.06] px-5 py-4">
-        <span className="h-2 w-2 rounded-full bg-rose-400/70" />
-        <span className="h-2 w-2 rounded-full bg-amber-300/70" />
-        <span className="h-2 w-2 rounded-full bg-emerald-300/70" />
-        <span className="ml-4 text-[10px] uppercase tracking-[0.24em] text-slate-600">
-          {project.visualLabel}
-        </span>
+    <div className="relative overflow-hidden border border-white/[0.08] bg-slate-950/90">
+      <div className="flex items-center justify-between gap-4 border-b border-white/[0.06] px-5 py-4">
+        <span className="text-[0.64rem] uppercase tracking-[0.24em] text-slate-500">{project.visualLabel}</span>
+        <GitBranch className="h-4 w-4 text-cyan-300/70" aria-hidden="true" />
       </div>
-      {visuals[project.visualVariant]}
+      {project.visualImage ? (
+        <div className="relative min-h-[22rem] overflow-hidden bg-[#050c17] sm:min-h-[28rem]">
+          <Image
+            src={project.visualImage}
+            alt={project.visualAlt ?? project.visualLabel}
+            width={1024}
+            height={576}
+            sizes="(min-width: 1024px) 54vw, 100vw"
+            className="h-full min-h-[22rem] w-full object-cover opacity-90 saturate-[0.95] sm:min-h-[28rem]"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0.05),rgba(2,6,23,0.78))]" />
+          <div className="pointer-events-none absolute left-0 top-0 h-20 w-24 bg-gradient-to-br from-[#050c17] via-[#050c17]/85 to-transparent" />
+          <p className="absolute bottom-5 left-5 right-5 max-w-xl border-l border-cyan-200/50 pl-4 text-sm leading-6 text-slate-100">
+            {project.visualIntent}
+          </p>
+        </div>
+      ) : (
+        <GraphVisual />
+      )}
       <div className="grid grid-cols-3 border-t border-white/[0.06] bg-slate-950/95">
         {project.visualStats.map((stat) => (
           <div key={stat.label} className="border-r border-white/[0.06] p-4 last:border-r-0">
@@ -219,90 +155,151 @@ function ActionButton({ button }: { button: ProjectButton }) {
   );
 }
 
-export function ProjectShowcase({ project, reverse = false, index }: ProjectShowcaseProps) {
+function NarrativePanel({ state, reduced = false }: { state: NarrativeState; reduced?: boolean }) {
+  const Icon = state.icon;
+
   return (
-    <article className="project-card project-story group border-t border-slate-800/90 py-14 sm:py-20 lg:py-28">
-      <div className={`grid gap-10 lg:grid-cols-12 lg:items-start ${reverse ? 'lg:[&>*:first-child]:order-2' : ''}`}>
-        <div className="lg:col-span-5">
-          <div className="flex items-center justify-between gap-5">
-            <p className="font-mono text-xs text-cyan-300/70">0{index + 1} / SELECTED WORK</p>
-            <span className="text-xs uppercase tracking-[0.2em] text-slate-600">{project.technologies[0]}</span>
-          </div>
-          <h3 className="mt-8 text-4xl font-semibold tracking-[-0.04em] text-white sm:text-5xl">
-            {project.title}
-          </h3>
-          <p className="mt-3 text-lg text-cyan-100/80">{project.subtitle}</p>
-          <p className="mt-7 max-w-xl text-base leading-8 text-slate-300">{project.description}</p>
+    <motion.div
+      key={state.label}
+      initial={reduced ? false : { opacity: 0, y: 18 }}
+      animate={reduced ? undefined : { opacity: 1, y: 0 }}
+      exit={reduced ? undefined : { opacity: 0, y: -10 }}
+      transition={{ duration: reduced ? 0 : 0.42, ease: [0.22, 1, 0.36, 1] }}
+      className="min-h-[22rem]"
+    >
+      <div className="flex items-center gap-3 text-cyan-200">
+        <Icon className="h-4 w-4" aria-hidden="true" />
+        <p className="font-mono text-xs uppercase tracking-[0.24em]">{state.eyebrow}</p>
+      </div>
+      <h4 className="editorial-serif mt-7 text-4xl font-semibold tracking-normal text-white sm:text-5xl">
+        {state.label}
+      </h4>
+      <p className="mt-6 max-w-xl text-lg leading-8 text-slate-200">{state.body}</p>
+      <ul className="mt-8 space-y-4 text-sm leading-6 text-slate-300">
+        {state.points.map((point) => (
+          <li key={point} className="grid grid-cols-[0.75rem_1fr] gap-3">
+            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-cyan-300" aria-hidden="true" />
+            <span>{point}</span>
+          </li>
+        ))}
+      </ul>
+    </motion.div>
+  );
+}
 
-          <div className="mt-9 border-y border-slate-800/80">
-            {[
-              ['Challenge', project.challenge],
-              ['Engineering decision', project.decision],
-              ['Proof', project.proof],
-            ].map(([label, value], storyIndex) => (
-              <div
-                key={label}
-                className="grid gap-2 border-b border-slate-800/70 py-5 last:border-b-0 sm:grid-cols-[8rem_1fr]"
-              >
-                <p className="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-cyan-300/65">
-                  0{storyIndex + 1} / {label}
-                </p>
-                <p className="text-sm leading-6 text-slate-200">{value}</p>
+export function ProjectShowcase({ project, index }: ProjectShowcaseProps) {
+  const targetRef = useRef<HTMLElement | null>(null);
+  const [activeState, setActiveState] = useState(0);
+  const reduceMotion = useReducedMotion();
+  const states = getNarrativeStates(project);
+  const shouldUseSticky = reduceMotion === false;
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ['start start', 'end end'],
+  });
+  const mediaScale = useTransform(scrollYProgress, [0, 1], [0.985, 1.015]);
+  const mediaY = useTransform(scrollYProgress, [0, 1], [12, -12]);
+  const progressHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    if (!shouldUseSticky) return;
+    const nextState = Math.min(states.length - 1, Math.max(0, Math.floor(latest * states.length)));
+    setActiveState(nextState);
+  });
+
+  return (
+    <article
+      ref={targetRef}
+      aria-labelledby={`project-${index}-title`}
+      className={`relative border-t border-slate-800/90 ${shouldUseSticky ? 'lg:min-h-[420vh]' : ''}`}
+    >
+      <div
+        className={`mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 ${
+          shouldUseSticky ? 'lg:sticky lg:top-16 lg:flex lg:min-h-[calc(100vh-4rem)] lg:items-center lg:py-10' : ''
+        }`}
+      >
+        <div className="grid w-full gap-12 lg:grid-cols-[minmax(0,1.08fr)_minmax(24rem,0.92fr)] lg:items-center">
+          <motion.div
+            style={shouldUseSticky ? { scale: mediaScale, y: mediaY } : undefined}
+            className="order-2 lg:order-1"
+          >
+            <ProjectMedia project={project} />
+          </motion.div>
+
+          <div className="order-1 lg:order-2">
+            <div className="flex items-center justify-between gap-5">
+              <p className="font-mono text-xs text-cyan-300/70">
+                {String(index + 1).padStart(2, '0')} / SELECTED WORK
+              </p>
+              <span className="text-xs uppercase tracking-[0.2em] text-slate-600">{project.technologies[0]}</span>
+            </div>
+
+            <h3
+              id={`project-${index}-title`}
+              className="editorial-serif mt-7 text-5xl font-semibold tracking-normal text-white sm:text-6xl"
+            >
+              {project.title}
+            </h3>
+            <p className="mt-3 text-lg text-cyan-100/80">{project.subtitle}</p>
+
+            <div className="mt-9 hidden gap-5 lg:grid lg:grid-cols-[2rem_1fr]">
+              <div className="relative pt-1" aria-hidden="true">
+                <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-slate-800" />
+                <motion.div
+                  className="absolute left-1/2 top-0 w-px -translate-x-1/2 bg-cyan-300"
+                  style={{ height: shouldUseSticky ? progressHeight : '100%' }}
+                />
               </div>
-            ))}
-          </div>
-
-          <div className="mt-8 grid gap-6 sm:grid-cols-2">
-            <div>
-              <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Engineering approach</p>
-              <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-300">
-                {project.highlights.slice(0, 3).map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
+              <div>
+                <div className="mb-7 grid grid-cols-4 gap-2" aria-label={`${project.title} narrative progress`}>
+                  {states.map((state, stateIndex) => (
+                    <div key={state.label} className="min-w-0">
+                      <p
+                        aria-current={stateIndex === activeState ? 'step' : undefined}
+                        className={`truncate text-[0.62rem] uppercase tracking-[0.2em] transition-colors ${
+                          stateIndex === activeState ? 'text-cyan-200' : 'text-slate-600'
+                        }`}
+                      >
+                        {state.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                {reduceMotion ? (
+                  <div className="space-y-10">
+                    {states.map((state) => (
+                      <NarrativePanel key={state.label} state={state} reduced />
+                    ))}
+                  </div>
+                ) : (
+                  <AnimatePresence mode="wait">
+                    <NarrativePanel state={states[activeState]} />
+                  </AnimatePresence>
+                )}
+              </div>
             </div>
-            <div>
-              <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Outcome</p>
-              <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-300">
-                {project.impact.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
 
-          <div className="mt-7 flex flex-wrap gap-2">
-            {project.technologies.map((technology) => (
-              <span
-                key={technology}
-                className="rounded-full border border-slate-800 px-3 py-1.5 text-xs text-slate-400 transition duration-300 group-hover:border-slate-700 group-hover:text-slate-300"
-              >
-                {technology}
-              </span>
-            ))}
-          </div>
-
-          {project.buttons.length ? (
-            <div className="mt-8 flex flex-wrap gap-3">
-              {project.buttons.map((button) => (
-                <ActionButton key={button.label} button={button} />
+            <div className="mt-10 space-y-10 lg:hidden">
+              {states.map((state) => (
+                <NarrativePanel key={state.label} state={state} reduced={Boolean(reduceMotion)} />
               ))}
             </div>
-          ) : null}
-        </div>
 
-        <div className="lg:col-span-7">
-          <div className="project-visual relative overflow-hidden rounded-[2rem] border border-white/[0.08] bg-[#07111f] p-4 shadow-[0_40px_100px_-55px_rgba(34,211,238,0.45)] sm:p-6">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,_rgba(34,211,238,0.12),_transparent_35%)]" />
-            <div className="absolute right-6 top-6 z-10 overflow-hidden rounded-full border border-white/10 bg-slate-950/75 px-3 py-1.5 backdrop-blur">
-              <span className="block text-[0.6rem] uppercase tracking-[0.22em] text-slate-400 transition-transform duration-500 group-hover:-translate-y-5">
-                Inspect system
-              </span>
-              <span className="absolute inset-x-0 top-1.5 translate-y-5 text-center text-[0.6rem] uppercase tracking-[0.22em] text-cyan-200 transition-transform duration-500 group-hover:translate-y-0">
-                View details
-              </span>
+            <div className="mt-8 flex flex-wrap gap-2">
+              {project.technologies.map((technology) => (
+                <span key={technology} className="rounded-full border border-slate-800 px-3 py-1.5 text-xs text-slate-400">
+                  {technology}
+                </span>
+              ))}
             </div>
-            <ProjectVisual project={project} />
+
+            {project.buttons.length ? (
+              <div className="mt-8 flex flex-wrap gap-3">
+                {project.buttons.map((button) => (
+                  <ActionButton key={button.label} button={button} />
+                ))}
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

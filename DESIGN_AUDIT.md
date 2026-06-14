@@ -67,6 +67,46 @@ After, the page opens with a clear professional thesis, gives recruiters direct 
 4. Add verified LeetCode and HackerRank profile URLs when available.
 5. Re-run Lighthouse against the final Vercel URL because network, caching, and hosting headers affect the production score.
 
+## June 2026 Editorial Elevation Pass
+
+### KEEP
+
+- Keep the existing Next.js App Router, Tailwind, Framer Motion, and data-driven project structure.
+- Keep the recruiter-critical actions: selected work, resume, publication, GitHub, LinkedIn, email, and contact.
+- Keep calm reveal motion, reduced-motion support, semantic sections, and strong contrast.
+- Keep project narratives organized around challenge, engineering decision, and proof.
+
+### REFINE
+
+- Refine the hero into a direct thesis: **Engineering Trustworthy Intelligence**.
+- Refine the five-section rhythm to Hero, Selected Work, Research, Journey, and Contact.
+- Refine the typography toward an editorial serif display system without negative letter spacing.
+- Refine the hero orbit into a meaningful signature interaction: Engineering x Research x Human Understanding around trust.
+- Refine supplied visuals into narrative media rather than decorative backgrounds.
+
+### REMOVE
+
+- Remove the extra rendered Skills, Achievements, Coding Profiles, and About sections from the live page rhythm.
+- Remove generic generated visuals where the supplied project storytelling assets communicate more clearly.
+- Remove negative display letter spacing to satisfy the current design constraint and improve text robustness.
+
+### ELEVATE
+
+- Flowint now uses the orchestration visual to communicate routing, retrieval, provider coordination, and decision pipelines.
+- AlgoVerse now uses the algorithmic graph visual to communicate clarity emerging from complexity.
+- The research section now uses the interpretable AI pathways image as the emotional center of the portfolio.
+- The ASL project now uses the hand-understanding visual to communicate accessibility and human-centered machine interpretation.
+- Research media includes a slow semantic scan animation that is disabled for reduced-motion users.
+
+### Implementation Plan Followed
+
+1. Copy supplied images into `public/story` for optimized `next/image` rendering.
+2. Extend project data with visual image, alt text, and narrative intent fields.
+3. Refactor `ProjectShowcase` to render supplied visuals with captions and evidence overlays.
+4. Refactor `ResearchSection` to make the interpretable AI visual the lead publication moment.
+5. Simplify page composition to the requested five-section portfolio structure.
+6. Update global typography and motion CSS with accessibility safeguards.
+
 ## Final Review
 
 - Google recruiter: strong information hierarchy and fast access to evidence; the project outcomes are now easier to scan.

@@ -4,9 +4,9 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { BookOpen, FileText, Github, MoveUpRight } from 'lucide-react';
 
 const concepts = [
-  { label: 'Explainability', className: 'left-[2%] top-[19%]' },
-  { label: 'Retrieval', className: 'right-[1%] top-[31%]' },
-  { label: 'NLP', className: 'bottom-[16%] left-[12%]' },
+  { label: 'Engineering', className: 'left-[2%] top-[19%]' },
+  { label: 'Research', className: 'right-[1%] top-[31%]' },
+  { label: 'Human understanding', className: 'bottom-[13%] left-[5%]' },
   { label: 'Trust', className: 'bottom-[9%] right-[17%]' },
 ];
 
@@ -34,14 +34,16 @@ export function HeroOrbit() {
           reduceMotion ? '' : 'orbit-spin-reverse'
         }`}
       />
+      <div aria-hidden="true" className="absolute left-1/2 top-[18%] h-[64%] w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-cyan-200/35 to-transparent" />
+      <div aria-hidden="true" className="absolute left-[18%] top-1/2 h-px w-[64%] -translate-y-1/2 bg-gradient-to-r from-transparent via-cyan-200/30 to-transparent" />
       <div className="absolute inset-[31%] rounded-full border border-white/10 bg-slate-950/90 shadow-[0_0_60px_rgba(34,211,238,0.12)]">
         <div className="flex h-full flex-col items-center justify-center text-center">
           <span className="font-mono text-[0.62rem] uppercase tracking-[0.22em] text-slate-500">
-            Current axis
+            Signature axis
           </span>
           <strong className="mt-2 text-lg font-medium text-white">Systems</strong>
           <span className="text-xs text-cyan-200">x</span>
-          <strong className="text-lg font-medium text-white">Trust</strong>
+          <strong className="text-lg font-medium text-white">Human need</strong>
         </div>
       </div>
       {concepts.map((concept) => (

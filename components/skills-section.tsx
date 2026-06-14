@@ -13,7 +13,7 @@ export function SkillsSection() {
           className="mb-10 max-w-3xl"
         >
           <p className="text-sm uppercase tracking-[0.28em] text-cyan-300/70">Technical Skills</p>
-          <h2 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+          <h2 className="editorial-serif mt-4 text-4xl font-semibold tracking-normal text-white sm:text-5xl">
             An elegant blend of software engineering, AI research, and production-grade delivery.
           </h2>
           <p className="mt-5 text-lg leading-8 text-slate-300">

@@ -53,7 +53,7 @@ export function ResearchPublicationCard({ publication }: { publication: Publicat
 
         <div className="mt-8 grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
-            <h3 className="max-w-3xl text-3xl font-semibold tracking-[-0.035em] text-white sm:text-4xl">
+            <h3 className="editorial-serif max-w-3xl text-3xl font-semibold tracking-normal text-white sm:text-4xl">
               {publication.title}
             </h3>
             <p className="mt-5 max-w-2xl text-base leading-8 text-slate-300">{publication.summary}</p>

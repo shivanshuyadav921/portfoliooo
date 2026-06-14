@@ -14,7 +14,7 @@ export function AchievementsSection() {
           className="mb-10 max-w-3xl"
         >
           <p className="text-sm uppercase tracking-[0.28em] text-cyan-300/70">Achievements</p>
-          <h2 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+          <h2 className="editorial-serif mt-4 text-4xl font-semibold tracking-normal text-white sm:text-5xl">
             Recognized milestones that reflect creativity, technical rigor, and consistent problem solving.
           </h2>
           <p className="mt-5 text-lg leading-8 text-slate-300">
@@ -55,7 +55,7 @@ export function AchievementsSection() {
           >
             <div className="rounded-[2rem] border border-slate-800/90 bg-slate-950/85 p-8 text-slate-300 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]">
               <p className="text-sm uppercase tracking-[0.28em] text-cyan-300/70">Problem solving</p>
-              <h3 className="mt-4 text-4xl font-semibold tracking-tight text-white">100+ problems solved</h3>
+              <h3 className="editorial-serif mt-4 text-4xl font-semibold tracking-normal text-white">100+ problems solved</h3>
               <p className="mt-5 text-sm leading-7 text-slate-300">
                 A sustained problem-solving practice across algorithm platforms that reinforces both research thinking and software craftsmanship.
               </p>

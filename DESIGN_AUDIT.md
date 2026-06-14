@@ -2,24 +2,28 @@
 
 ## Design Gap Analysis
 
-### High Impact / Low Effort
+### Reference Direction
 
-1. The original hero lacked a memorable point of view and a clear visual thesis.
-2. Resume, projects, and publication actions were not prominent enough for recruiter scanning.
-3. Repeated rounded cards gave every piece of content similar visual weight.
-4. Project descriptions read as feature inventories rather than problem-solving narratives.
-5. Research credibility was buried instead of led by the publication and benchmark evidence.
-6. Section headings used a consistent but generic pattern with limited editorial rhythm.
-7. Hover states and button feedback were functional but did not feel especially crafted.
+The target is a balanced combination of Moncy's expressive editorial motion and Naresh's direct, evidence-led professional presentation. The portfolio should feel authored and memorable without slowing down recruiter scanning.
 
-### High Impact / High Effort
+### Current Gaps
 
-8. Project visuals were abstract placeholders rather than authentic product screenshots or case-study media.
-9. Motion was consistent but lacked a shared choreography across the complete page.
+1. **Hero signature:** The opening typography is strong, but there is no distinctive kinetic object or compositional tension to make the first screen memorable.
+2. **Motion language:** Most sections use the same vertical fade. The page needs stagger, directional movement, and continuous ambient motion to feel choreographed.
+3. **Editorial scale:** Headings are large but remain inside conventional two-column portfolio layouts. More asymmetry and whitespace would create a stronger point of view.
+4. **Project narrative:** Projects list engineering details and outcomes, but do not frame the challenge, pivotal decision, and proof in a recruiter's preferred scan order.
+5. **Project interaction:** The interface mockups are polished placeholders, though their hover behavior does not yet communicate depth or craft.
+6. **Research authority:** The publication has a DOI and benchmark results, but its credibility signals are distributed across the card rather than composed as a publication record.
+7. **Section rhythm:** Dense card groups recur with similar spacing and visual weight, reducing the sense of progression through the portfolio.
+8. **Authentic media:** Real product captures would increase trust, but sourcing and art-directing them is outside this focused refinement pass.
 
-### Low Impact
+### Top Three Improvements Selected
 
-10. The site could support optional theme switching or more decorative transitions, but neither would improve recruiter outcomes enough to justify the added complexity now.
+1. **Editorial kinetic hero:** Add a lightweight revolving research orbit, more dramatic type scale, staggered line entrances, and a clearer recruiter-facing proof strip.
+2. **Story-led project case studies:** Reframe every project around challenge, engineering decision, and proof; add premium pointer-safe hover depth to the existing visual.
+3. **Publication-led research story:** Turn the lead paper into a scannable publication record with benchmark evidence, contribution framing, and a visible impact statement.
+
+These changes offer the largest improvement in perceived craft and professional clarity while preserving the current sections, data flow, and Next.js architecture.
 
 ## Improvements Implemented
 

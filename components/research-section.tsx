@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { ArrowUpRight, BookOpen, Fingerprint, FlaskConical } from 'lucide-react';
 
 type ResearchItem = {
   title: string;
@@ -88,6 +89,26 @@ export function ResearchSection() {
                   : 'rounded-[1.5rem] bg-slate-950/60'
               }`}
             >
+              {index === 0 ? (
+                <div className="grid border-b border-slate-800/90 bg-white/[0.025] sm:grid-cols-3">
+                  {[
+                    { icon: BookOpen, label: 'Publication', value: 'Zenodo / May 2026' },
+                    { icon: Fingerprint, label: 'Persistent record', value: 'DOI registered' },
+                    { icon: FlaskConical, label: 'Evaluation', value: '2 benchmarks + ablations' },
+                  ].map(({ icon: Icon, label, value }) => (
+                    <div
+                      key={label}
+                      className="flex items-center gap-3 border-b border-slate-800/80 p-5 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0"
+                    >
+                      <Icon className="h-4 w-4 text-cyan-300" aria-hidden="true" />
+                      <div>
+                        <p className="text-[0.65rem] uppercase tracking-[0.22em] text-slate-500">{label}</p>
+                        <p className="mt-1 text-sm text-slate-100">{value}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
               <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
                 <div className="space-y-6 p-7 sm:p-8">
                   <div className="flex flex-col gap-3">
@@ -109,9 +130,10 @@ export function ResearchSection() {
                         href={item.href}
                         target="_blank"
                         rel="noreferrer"
-                        className="w-fit rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 transition duration-300 hover:-translate-y-0.5 hover:bg-cyan-100"
+                        className="group inline-flex w-fit items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 transition duration-300 hover:-translate-y-0.5 hover:bg-cyan-100"
                       >
                         View publication and DOI
+                        <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                       </a>
                     ) : null}
                   </div>
@@ -131,15 +153,24 @@ export function ResearchSection() {
 
                 <div className="border-t border-slate-800/90 p-7 sm:p-8 lg:border-l lg:border-t-0">
                   {index === 0 ? (
-                    <div className="mb-8 grid grid-cols-2 gap-3">
-                      <div className="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-4">
-                        <p className="text-3xl font-semibold text-white">78.4%</p>
-                        <p className="mt-1 text-xs text-slate-500">GeoQuery exact match</p>
+                    <div className="mb-8">
+                      <p className="mb-3 text-[0.65rem] uppercase tracking-[0.24em] text-slate-500">
+                        Reported benchmark evidence
+                      </p>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-4">
+                          <p className="text-3xl font-semibold text-white">78.4%</p>
+                          <p className="mt-1 text-xs text-slate-500">GeoQuery exact match</p>
+                        </div>
+                        <div className="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-4">
+                          <p className="text-3xl font-semibold text-white">74.1%</p>
+                          <p className="mt-1 text-xs text-slate-500">ATIS exact match</p>
+                        </div>
                       </div>
-                      <div className="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-4">
-                        <p className="text-3xl font-semibold text-white">74.1%</p>
-                        <p className="mt-1 text-xs text-slate-500">ATIS exact match</p>
-                      </div>
+                      <p className="mt-5 border-l border-cyan-300/40 pl-4 text-sm leading-7 text-slate-300">
+                        The work connects formal, inspectable transformations with modern NLP tooling,
+                        making model behavior easier to trace than opaque end-to-end generation.
+                      </p>
                     </div>
                   ) : null}
                   <p className="text-xs uppercase tracking-[0.24em] text-cyan-300/75">Method & contribution</p>

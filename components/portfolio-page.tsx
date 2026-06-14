@@ -9,6 +9,7 @@ import { Footer } from '@/components/footer';
 import { HeroSection } from '@/components/hero-section';
 import { JourneySection } from '@/components/journey-section';
 import { ResearchSection } from '@/components/research-section';
+import { SectionReveal } from '@/components/section-reveal';
 import { SkillsSection } from '@/components/skills-section';
 import { Download } from 'lucide-react';
 
@@ -72,14 +73,24 @@ export function PortfolioPage() {
             <HeroSection />
           </div>
         </div>
-        <AboutSection />
-        <FeaturedProjectsSection />
-        <ResearchSection />
+        <SectionReveal>
+          <AboutSection />
+        </SectionReveal>
+        <SectionReveal>
+          <FeaturedProjectsSection />
+        </SectionReveal>
+        <SectionReveal>
+          <ResearchSection />
+        </SectionReveal>
         <SkillsSection />
-        <JourneySection />
+        <SectionReveal>
+          <JourneySection />
+        </SectionReveal>
         <AchievementsSection />
         <CodingProfilesSection />
-        <ContactSection />
+        <SectionReveal>
+          <ContactSection />
+        </SectionReveal>
       </main>
       <Footer />
     </div>

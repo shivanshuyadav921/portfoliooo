@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { ArrowUpRight, Camera, Check, GitBranch, Play, ScanLine } from 'lucide-react';
 import { ProjectButton, ProjectItem } from '@/data/projects';
 
@@ -7,8 +6,6 @@ type ProjectShowcaseProps = {
   reverse?: boolean;
   index: number;
 };
-
-const ease = [0.22, 1, 0.36, 1] as const;
 
 function PipelineVisual() {
   const stages = [
@@ -224,13 +221,7 @@ function ActionButton({ button }: { button: ProjectButton }) {
 
 export function ProjectShowcase({ project, reverse = false, index }: ProjectShowcaseProps) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 36 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.16 }}
-      transition={{ duration: 0.85, ease }}
-      className="project-story group border-t border-slate-800/90 py-14 sm:py-20 lg:py-28"
-    >
+    <article className="project-card project-story group border-t border-slate-800/90 py-14 sm:py-20 lg:py-28">
       <div className={`grid gap-10 lg:grid-cols-12 lg:items-start ${reverse ? 'lg:[&>*:first-child]:order-2' : ''}`}>
         <div className="lg:col-span-5">
           <div className="flex items-center justify-between gap-5">
@@ -315,6 +306,6 @@ export function ProjectShowcase({ project, reverse = false, index }: ProjectShow
           </div>
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }

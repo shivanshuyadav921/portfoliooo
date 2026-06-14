@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { ArrowDownRight, ArrowUpRight, Download } from 'lucide-react';
+import { ArrowDownRight, Download } from 'lucide-react';
+import { HeroOrbit, HeroProofStrip } from '@/components/hero-orbit';
 
 const focusAreas = ['Scalable software', 'Multilingual NLP', 'Explainable AI'];
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -37,7 +38,7 @@ export function HeroSection() {
 
           <h1
             id="hero-heading"
-            className="editorial-balance max-w-6xl text-[clamp(3.25rem,9vw,8.6rem)] font-semibold leading-[0.84] tracking-[-0.075em] text-white"
+            className="display-headline editorial-balance max-w-5xl text-white"
           >
             {['Engineering', 'systems.'].map((line, index) => (
               <motion.span
@@ -88,41 +89,10 @@ export function HeroSection() {
               </a>
             </div>
           </motion.div>
+          <HeroProofStrip />
         </div>
 
-        <motion.aside
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.3, ease }}
-          className="relative mx-auto flex aspect-square w-full max-w-[22rem] items-center justify-center lg:justify-self-end"
-        >
-          <div className="absolute inset-[5%] rounded-full border border-slate-700/60" />
-          <div className="orbit-spin absolute inset-[5%] rounded-full">
-            <span className="signal-pulse absolute left-1/2 top-[-0.35rem] h-3 w-3 rounded-full bg-cyan-200 shadow-[0_0_24px_rgba(103,232,249,0.9)]" />
-          </div>
-          <div className="orbit-spin-reverse absolute inset-[18%] rounded-full border border-dashed border-cyan-300/25">
-            <span className="absolute bottom-[8%] right-[4%] h-2 w-2 rounded-full bg-indigo-300 shadow-[0_0_18px_rgba(165,180,252,0.8)]" />
-          </div>
-          <div className="absolute inset-[31%] rounded-full border border-white/10 bg-slate-950/85 shadow-[0_0_70px_rgba(34,211,238,0.14)] backdrop-blur">
-            <div className="flex h-full flex-col items-center justify-center text-center">
-              <span className="font-mono text-[0.65rem] uppercase tracking-[0.24em] text-slate-500">Current axis</span>
-              <strong className="mt-2 text-lg font-medium text-white">Systems</strong>
-              <span className="text-xs text-cyan-200">x</span>
-              <strong className="text-lg font-medium text-white">Trust</strong>
-            </div>
-          </div>
-          <span className="absolute left-0 top-[18%] text-[0.62rem] uppercase tracking-[0.22em] text-slate-500">Explain</span>
-          <span className="absolute bottom-[15%] right-0 text-[0.62rem] uppercase tracking-[0.22em] text-slate-500">Deploy</span>
-          <a
-            href="https://doi.org/10.5281/zenodo.20437981"
-            target="_blank"
-            rel="noreferrer"
-            className="group absolute bottom-0 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 whitespace-nowrap text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200"
-          >
-            Published research
-            <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-          </a>
-        </motion.aside>
+        <HeroOrbit />
       </div>
 
       <motion.div

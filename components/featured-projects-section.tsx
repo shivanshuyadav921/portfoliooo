@@ -1,6 +1,7 @@
 import { ProjectShowcase } from '@/components/project-showcase';
 import { featuredProjects } from '@/data/projects';
 import { motion } from 'framer-motion';
+import { StaggerChildren } from '@/components/stagger-children';
 
 export function FeaturedProjectsSection() {
   return (
@@ -25,11 +26,11 @@ export function FeaturedProjectsSection() {
           </p>
         </motion.div>
 
-        <div className="space-y-10">
+        <StaggerChildren className="space-y-10">
           {featuredProjects.map((project, index) => (
             <ProjectShowcase key={project.title} project={project} reverse={index % 2 !== 0} index={index} />
           ))}
-        </div>
+        </StaggerChildren>
       </div>
     </section>
   );

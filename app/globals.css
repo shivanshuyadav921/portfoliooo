@@ -41,42 +41,6 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
 }
 
-@keyframes orbit-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes orbit-spin-reverse {
-  to {
-    transform: rotate(-360deg);
-  }
-}
-
-@keyframes signal-pulse {
-  0%,
-  100% {
-    opacity: 0.45;
-    transform: translateX(-50%) scale(0.92);
-  }
-  50% {
-    opacity: 1;
-    transform: translateX(-50%) scale(1.08);
-  }
-}
-
-.orbit-spin {
-  animation: orbit-spin 22s linear infinite;
-}
-
-.orbit-spin-reverse {
-  animation: orbit-spin-reverse 16s linear infinite;
-}
-
-.signal-pulse {
-  animation: signal-pulse 3.4s ease-in-out infinite;
-}
-
 .editorial-balance {
   text-wrap: balance;
 }
@@ -127,26 +91,6 @@ body::before {
 
 .editorial-serif {
   font-family: Georgia, 'Times New Roman', serif;
-}
-
-.research-pathways::after {
-  position: absolute;
-  inset: 0;
-  content: '';
-  background: linear-gradient(90deg, transparent, rgba(103, 232, 249, 0.16), transparent);
-  transform: translateX(-120%);
-  animation: pathway-scan 9s ease-in-out infinite;
-}
-
-@keyframes pathway-scan {
-  0%,
-  24% {
-    transform: translateX(-120%);
-  }
-  52%,
-  100% {
-    transform: translateX(120%);
-  }
 }
 
 .project-divider {
@@ -214,10 +158,4 @@ select {
     scroll-behavior: auto !important;
   }
 
-  .orbit-spin,
-  .orbit-spin-reverse,
-  .signal-pulse,
-  .research-pathways::after {
-    animation: none !important;
-  }
 }

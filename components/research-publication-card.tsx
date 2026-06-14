@@ -12,6 +12,8 @@ export type Publication = {
   summary: string;
   methodology: string;
   doi: string;
+  publicationLink?: string;
+  ctaLabel?: string;
   benchmarks: { value: string; label: string }[];
   contributions: string[];
   technologies: string[];
@@ -64,12 +66,12 @@ export function ResearchPublicationCard({ publication }: { publication: Publicat
             </div>
 
             <a
-              href={publication.doi}
+              href={publication.publicationLink ?? publication.doi}
               target="_blank"
               rel="noreferrer"
               className="mt-8 inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-slate-950 transition hover:bg-cyan-100"
             >
-              View publication and DOI
+              {publication.ctaLabel ?? (publication.publicationLink ? 'View Publication' : 'View Publication & DOI')}
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>

@@ -307,6 +307,12 @@ export function ProjectShowcase({ project, index }: ProjectShowcaseProps) {
   const reduceMotion = useReducedMotion();
   const states = getNarrativeStates(project);
   const shouldUseSticky = reduceMotion === false;
+  const mediaOnLeft = index % 2 === 1;
+  const narrativeOrder = mediaOnLeft ? 'lg:order-2' : 'lg:order-1';
+  const mediaOrder = mediaOnLeft ? 'lg:order-1' : 'lg:order-2';
+  const gridColumns = mediaOnLeft
+    ? 'lg:grid-cols-[minmax(24rem,1.1fr)_minmax(0,0.9fr)]'
+    : 'lg:grid-cols-[minmax(0,0.9fr)_minmax(24rem,1.1fr)]';
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -339,10 +345,10 @@ export function ProjectShowcase({ project, index }: ProjectShowcaseProps) {
          * Reading order puts the narrative first — the media supports it.
          * On mobile, media drops below all the text content.
          */}
-        <div className="grid w-full gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(24rem,1.1fr)] lg:items-start lg:gap-16">
+        <div className={`grid w-full gap-12 ${gridColumns} lg:items-start lg:gap-16`}>
 
           {/* ── Left Column: Narrative ──────────────────────────────── */}
-          <div className="order-1">
+          <div className={`order-1 ${narrativeOrder}`}>
 
             {/* Opening Spread — Project Identity */}
             <div className="mb-8">
@@ -422,7 +428,7 @@ export function ProjectShowcase({ project, index }: ProjectShowcaseProps) {
           {/* ── Right Column: Media ─────────────────────────────── */}
           <motion.div
             style={shouldUseSticky ? { scale: mediaScale, y: mediaY } : undefined}
-            className="order-2"
+            className={`order-2 ${mediaOrder}`}
           >
             <ProjectMedia project={project} />
           </motion.div>

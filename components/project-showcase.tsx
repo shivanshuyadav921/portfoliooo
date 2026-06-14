@@ -14,8 +14,6 @@ import Image from 'next/image';
 import { ArrowUpRight, Check, GitBranch, Layers3, Target, Wrench } from 'lucide-react';
 import { ProjectButton, ProjectItem } from '@/data/projects';
 
-/* ─── Types ─────────────────────────────────────────────────────────── */
-
 type ProjectShowcaseProps = {
   project: ProjectItem;
   index: number;
@@ -29,12 +27,15 @@ type NarrativeState = {
   icon: typeof Target;
 };
 
-/* ─── Shared Constants ──────────────────────────────────────────────── */
-
 const EASE = [0.22, 1, 0.36, 1] as const;
 const TRANSITION_DURATION = 0.42;
 
-/* ─── Data Helpers ──────────────────────────────────────────────────── */
+function toSlug(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
 
 function getNarrativeStates(project: ProjectItem): NarrativeState[] {
   return [
@@ -69,16 +70,10 @@ function getNarrativeStates(project: ProjectItem): NarrativeState[] {
   ];
 }
 
-/* ─── Subcomponents ─────────────────────────────────────────────────── */
-
-/**
- * GraphVisual — SVG-based visual for the GraphSpace project
- * (which has no screenshot). Unchanged from the original.
- */
 function GraphVisual() {
   return (
     <div className="relative min-h-[24rem] overflow-hidden bg-[#050c17] p-5 sm:p-7">
-      <div className="relative z-10 flex items-center justify-between">
+      <div className="relative z-10 flex items-center justify-between gap-4">
         <div>
           <p className="text-[0.65rem] uppercase tracking-[0.22em] text-slate-500">Repository topology</p>
           <p className="mt-2 text-xl font-medium text-white">Collaborative graph system</p>
@@ -119,11 +114,6 @@ function GraphVisual() {
   );
 }
 
-/**
- * ProjectMedia — The visual evidence panel.
- * Displays either an editorial image or the GraphVisual SVG fallback.
- * Renders stats bar below.
- */
 function ProjectMedia({ project }: { project: ProjectItem }) {
   return (
     <div className="relative overflow-hidden border border-white/[0.08] bg-slate-950/90">
@@ -162,9 +152,6 @@ function ProjectMedia({ project }: { project: ProjectItem }) {
   );
 }
 
-/**
- * ActionButton — External link button for GitHub / live demo.
- */
 function ActionButton({ button }: { button: ProjectButton }) {
   return (
     <a
@@ -179,25 +166,49 @@ function ActionButton({ button }: { button: ProjectButton }) {
   );
 }
 
-/**
- * NarrativePanel — Renders a single narrative state's content.
- *
- * Motion behaviour:
- * - Enter: slides up from y:18, fades in (matches scroll direction)
- * - Exit:  slides up to y:-8, fades out (text "ascends" as you pass it)
- * - Reduced motion: renders statically with no animation
- */
-function NarrativePanel({ state, reduced = false }: { state: NarrativeState; reduced?: boolean }) {
+function NarrativePanel({
+  state,
+  projectTitle,
+  reduced = false,
+}: {
+  state: NarrativeState;
+  projectTitle: string;
+  reduced?: boolean;
+}) {
   const Icon = state.icon;
+  const panelId = `narrative-panel-${toSlug(projectTitle)}-${toSlug(state.label)}`;
+
+  if (reduced) {
+    return (
+      <section id={panelId} className="min-h-[18rem]">
+        <div className="flex items-center gap-3 text-cyan-200">
+          <Icon className="h-4 w-4" aria-hidden="true" />
+          <p className="font-mono text-xs uppercase tracking-[0.24em]">{state.eyebrow}</p>
+        </div>
+        <h4 className="editorial-serif mt-6 text-3xl font-semibold tracking-normal text-white sm:text-4xl">
+          {state.label}
+        </h4>
+        <p className="mt-5 max-w-xl text-base leading-8 text-slate-200 sm:text-lg sm:leading-8">{state.body}</p>
+        <ul className="mt-7 space-y-3.5 text-sm leading-6 text-slate-300">
+          {state.points.map((point) => (
+            <li key={point} className="grid grid-cols-[0.75rem_1fr] gap-3">
+              <span className="mt-2 h-1.5 w-1.5 rounded-full bg-cyan-300" aria-hidden="true" />
+              <span>{point}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    );
+  }
 
   return (
-    <motion.div
-      key={state.label}
-      initial={reduced ? false : { opacity: 0, y: 18 }}
-      animate={reduced ? undefined : { opacity: 1, y: 0 }}
-      exit={reduced ? undefined : { opacity: 0, y: -8 }}
-      transition={{ duration: reduced ? 0 : TRANSITION_DURATION, ease: EASE }}
-      className="min-h-[20rem]"
+    <motion.section
+      id={panelId}
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -8 }}
+      transition={{ duration: TRANSITION_DURATION, ease: EASE }}
+      className="min-h-[18rem]"
     >
       <div className="flex items-center gap-3 text-cyan-200">
         <Icon className="h-4 w-4" aria-hidden="true" />
@@ -215,92 +226,79 @@ function NarrativePanel({ state, reduced = false }: { state: NarrativeState; red
           </li>
         ))}
       </ul>
-    </motion.div>
+    </motion.section>
   );
 }
 
-/**
- * ProgressRail — Vertical progress indicator with stacked labels.
- *
- * Design decision: Labels stack vertically along a thin rail rather than
- * in a horizontal 4-column grid. This reads like a table of contents
- * in an editorial layout, giving each label room to breathe.
- *
- * The cyan fill line and active dot slide as the user scrolls.
- */
-function ProgressRail({
-  states,
-  activeState,
-  progressHeight,
-  projectTitle,
-}: {
-  states: NarrativeState[];
-  activeState: number;
-  progressHeight: MotionValue<string>;
-  projectTitle: string;
-}) {
+function OpeningSpread({ project, index }: ProjectShowcaseProps) {
   return (
-    <div
-      className="flex gap-5"
-      aria-label={`${projectTitle} narrative progress`}
-      role="tablist"
-    >
-      {/* The vertical rail */}
-      <div className="relative w-3 shrink-0 pt-0.5" aria-hidden="true">
-        {/* Background track */}
-        <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-slate-800" />
-        {/* Cyan fill — grows with scroll */}
-        <motion.div
-          className="absolute left-1/2 top-0 w-px -translate-x-1/2 bg-cyan-300/80"
-          style={{ height: progressHeight }}
-        />
-        {/* Dots at each state position */}
-        {states.map((state, i) => (
-          <div
-            key={state.label}
-            className={`narrative-dot absolute left-1/2 -translate-x-1/2 ${
-              i <= activeState ? 'narrative-dot--active' : 'narrative-dot--inactive'
-            }`}
-            style={{ top: `${(i / (states.length - 1)) * 100}%`, transform: 'translate(-50%, -50%)' }}
-          />
-        ))}
-      </div>
-
-      {/* Stacked state labels */}
-      <div className="flex flex-1 flex-col justify-between py-0.5">
-        {states.map((state, i) => (
-          <p
-            key={state.label}
-            role="tab"
-            aria-selected={i === activeState}
-            aria-controls={`narrative-panel-${projectTitle}-${state.label}`}
-            className={`text-[0.65rem] uppercase tracking-[0.2em] transition-colors duration-300 ${
-              i === activeState ? 'text-cyan-200' : 'text-slate-600'
-            }`}
-          >
-            {state.label}
+    <div className="mb-12 lg:mb-16">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.62fr)] lg:items-end">
+        <div>
+          <p className="font-mono text-xs uppercase tracking-[0.28em] text-cyan-300/70">
+            {String(index + 1).padStart(2, '0')} / SELECTED WORK
           </p>
-        ))}
+          <h3
+            id={`project-${index}-title`}
+            className="editorial-serif mt-6 text-5xl font-semibold tracking-normal text-white sm:text-6xl lg:text-[4.75rem]"
+          >
+            {project.title}
+          </h3>
+        </div>
+        <div className="max-w-xl lg:justify-self-end">
+          <p className="text-lg leading-8 text-cyan-100/80 sm:text-xl">{project.subtitle}</p>
+          <p className="mt-5 text-base leading-8 text-slate-300">{project.description}</p>
+        </div>
       </div>
+      <div className="project-divider mt-10" aria-hidden="true" />
     </div>
   );
 }
 
-/* ─── Main Component ────────────────────────────────────────────────── */
+function ProgressRail({
+  states,
+  activeState,
+  fillHeight,
+  dotPosition,
+  projectTitle,
+}: {
+  states: NarrativeState[];
+  activeState: number;
+  fillHeight: MotionValue<string> | string;
+  dotPosition: MotionValue<string> | string;
+  projectTitle: string;
+}) {
+  return (
+    <div className="flex gap-5" aria-label={`${projectTitle} narrative sequence`}>
+      <div className="relative w-3 shrink-0 pt-1" aria-hidden="true">
+        <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-slate-800" />
+        <motion.div
+          className="absolute left-1/2 top-0 w-px -translate-x-1/2 bg-cyan-300/80"
+          style={{ height: fillHeight }}
+        />
+        <motion.div
+          className="absolute left-1/2 z-10 h-2.5 w-2.5 -translate-x-1/2 rounded-full border border-cyan-100/40 bg-cyan-300 shadow-[0_0_10px_rgba(103,232,249,0.4)]"
+          style={{ top: dotPosition }}
+        />
+      </div>
 
-/**
- * ProjectShowcase — Renders a single project as an editorial "chapter."
- *
- * Layout on large screens (lg+):
- *   Left column  (~45%): Project identity → progress rail → narrative panel → tech tags → action buttons
- *   Right column (~55%): Media panel, pinned alongside the narrative
- *
- * The entire article uses sticky positioning with a tall scroll container
- * (420vh) so that the viewport-pinned layout can transition through 4
- * narrative states as the user scrolls.
- *
- * Mobile: Everything stacks vertically with all states visible, no sticky.
- */
+      <ol className="flex flex-1 flex-col justify-between gap-4 py-0.5">
+        {states.map((state, i) => (
+          <li
+            key={state.label}
+            aria-current={i === activeState ? 'step' : undefined}
+            className={`text-[0.7rem] uppercase tracking-[0.22em] transition-colors duration-300 ${
+              i === activeState ? 'text-cyan-200' : 'text-slate-600'
+            }`}
+          >
+            {state.label}
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
 export function ProjectShowcase({ project, index }: ProjectShowcaseProps) {
   const targetRef = useRef<HTMLElement | null>(null);
   const [activeState, setActiveState] = useState(0);
@@ -311,17 +309,18 @@ export function ProjectShowcase({ project, index }: ProjectShowcaseProps) {
   const narrativeOrder = mediaOnLeft ? 'lg:order-2' : 'lg:order-1';
   const mediaOrder = mediaOnLeft ? 'lg:order-1' : 'lg:order-2';
   const gridColumns = mediaOnLeft
-    ? 'lg:grid-cols-[minmax(24rem,1.1fr)_minmax(0,0.9fr)]'
-    : 'lg:grid-cols-[minmax(0,0.9fr)_minmax(24rem,1.1fr)]';
+    ? 'lg:grid-cols-[minmax(24rem,1.08fr)_minmax(0,0.92fr)]'
+    : 'lg:grid-cols-[minmax(0,0.92fr)_minmax(24rem,1.08fr)]';
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ['start start', 'end end'],
   });
 
-  const mediaScale = useTransform(scrollYProgress, [0, 1], [0.985, 1.015]);
-  const mediaY = useTransform(scrollYProgress, [0, 1], [12, -12]);
+  const mediaScale = useTransform(scrollYProgress, [0, 1], [0.985, 1.01]);
+  const mediaY = useTransform(scrollYProgress, [0, 1], [10, -10]);
   const progressHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  const progressDot = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
     if (!shouldUseSticky) return;
@@ -340,45 +339,16 @@ export function ProjectShowcase({ project, index }: ProjectShowcaseProps) {
           shouldUseSticky ? 'lg:sticky lg:top-16 lg:flex lg:min-h-[calc(100vh-4rem)] lg:items-center lg:py-10' : ''
         }`}
       >
-        {/*
-         * Editorial grid: text-left (story), media-right (evidence).
-         * Reading order puts the narrative first — the media supports it.
-         * On mobile, media drops below all the text content.
-         */}
         <div className={`grid w-full gap-12 ${gridColumns} lg:items-start lg:gap-16`}>
-
-          {/* ── Left Column: Narrative ──────────────────────────────── */}
           <div className={`order-1 ${narrativeOrder}`}>
+            <OpeningSpread project={project} index={index} />
 
-            {/* Opening Spread — Project Identity */}
-            <div className="mb-8">
-              <div className="flex items-center justify-between gap-5">
-                <p className="font-mono text-xs text-cyan-300/70">
-                  {String(index + 1).padStart(2, '0')} / SELECTED WORK
-                </p>
-                <span className="text-xs uppercase tracking-[0.2em] text-slate-600">
-                  {project.technologies[0]}
-                </span>
-              </div>
-
-              <h3
-                id={`project-${index}-title`}
-                className="editorial-serif mt-6 text-5xl font-semibold tracking-normal text-white sm:text-6xl"
-              >
-                {project.title}
-              </h3>
-              <p className="mt-3 text-lg text-cyan-100/80">{project.subtitle}</p>
-
-              {/* Editorial rule — separates identity from narrative */}
-              <div className="project-divider mt-8" aria-hidden="true" />
-            </div>
-
-            {/* Desktop: Progress Rail + Animated Narrative ───────── */}
-            <div className="hidden lg:grid lg:grid-cols-[3.5rem_1fr] lg:gap-4">
+            <div className="hidden lg:grid lg:grid-cols-[3.75rem_1fr] lg:gap-5">
               <ProgressRail
                 states={states}
                 activeState={shouldUseSticky ? activeState : states.length - 1}
-                progressHeight={progressHeight}
+                fillHeight={shouldUseSticky ? progressHeight : '100%'}
+                dotPosition={shouldUseSticky ? progressDot : '100%'}
                 projectTitle={project.title}
               />
 
@@ -386,27 +356,32 @@ export function ProjectShowcase({ project, index }: ProjectShowcaseProps) {
                 {reduceMotion ? (
                   <div className="space-y-10">
                     {states.map((state) => (
-                      <NarrativePanel key={state.label} state={state} reduced />
+                      <NarrativePanel key={state.label} state={state} projectTitle={project.title} reduced />
                     ))}
                   </div>
                 ) : (
                   <AnimatePresence mode="wait">
                     <NarrativePanel
+                      key={states[activeState].label}
                       state={states[activeState]}
+                      projectTitle={project.title}
                     />
                   </AnimatePresence>
                 )}
               </div>
             </div>
 
-            {/* Mobile: All states rendered statically ───────────── */}
             <div className="mt-2 space-y-10 lg:hidden">
               {states.map((state) => (
-                <NarrativePanel key={state.label} state={state} reduced={Boolean(reduceMotion)} />
+                <NarrativePanel
+                  key={state.label}
+                  state={state}
+                  projectTitle={project.title}
+                  reduced={Boolean(reduceMotion)}
+                />
               ))}
             </div>
 
-            {/* Tech tags */}
             <div className="mt-8 flex flex-wrap gap-2">
               {project.technologies.map((technology) => (
                 <span key={technology} className="rounded-full border border-slate-800 px-3 py-1.5 text-xs text-slate-400">
@@ -415,7 +390,6 @@ export function ProjectShowcase({ project, index }: ProjectShowcaseProps) {
               ))}
             </div>
 
-            {/* Action buttons */}
             {project.buttons.length ? (
               <div className="mt-8 flex flex-wrap gap-3">
                 {project.buttons.map((button) => (
@@ -425,7 +399,6 @@ export function ProjectShowcase({ project, index }: ProjectShowcaseProps) {
             ) : null}
           </div>
 
-          {/* ── Right Column: Media ─────────────────────────────── */}
           <motion.div
             style={shouldUseSticky ? { scale: mediaScale, y: mediaY } : undefined}
             className={`order-2 ${mediaOrder}`}

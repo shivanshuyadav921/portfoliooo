@@ -26,9 +26,10 @@ body {
   color: #e2e8f0;
   margin: 0;
   background-image:
-    linear-gradient(rgba(148, 163, 184, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.025) 1px, transparent 1px);
-  background-size: 72px 72px;
+    radial-gradient(circle at top, rgba(14, 165, 233, 0.1), transparent 36%),
+    linear-gradient(rgba(148, 163, 184, 0.024) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.024) 1px, transparent 1px);
+  background-size: auto, 72px 72px, 72px 72px;
 }
 
 body::before {
@@ -95,7 +96,7 @@ body::before {
 
 .project-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.12) 20%, rgba(148, 163, 184, 0.12) 80%, transparent);
+  background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.1) 18%, rgba(148, 163, 184, 0.1) 82%, transparent);
 }
 
 .narrative-dot {

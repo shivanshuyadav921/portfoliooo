@@ -1,0 +1,50 @@
+ ⨯ Error: Could not find the module "C:\Users\shiva\OneDrive\Desktop\portfolio\node_modules\next\dist\next-devtools\userspace\app\segment-explorer-node.js#SegmentViewNode" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+    at stringify (<anonymous>) {
+  digest: '1772337279'
+}
+ ⨯ Error: Could not find the module "C:\Users\shiva\OneDrive\Desktop\portfolio\node_modules\next\dist\next-devtools\userspace\app\segment-explorer-node.js#SegmentViewNode" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+    at stringify (<anonymous>) {
+  digest: '4089040211'
+}
+ ⨯ Error: Could not find the module "C:\Users\shiva\OneDrive\Desktop\portfolio\node_modules\next\dist\next-devtools\userspace\app\segment-explorer-node.js#SegmentViewNode" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+    at stringify (<anonymous>) {
+  digest: '4089040211'
+}
+ ⨯ Error: Could not find the module "C:\Users\shiva\OneDrive\Desktop\portfolio\node_modules\next\dist\next-devtools\userspace\app\segment-explorer-node.js#SegmentViewNode" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+    at stringify (<anonymous>) {
+  digest: '4089040211'
+}
+ ⨯ Error: Could not find the module "C:\Users\shiva\OneDrive\Desktop\portfolio\node_modules\next\dist\next-devtools\userspace\app\segment-explorer-node.js#SegmentViewNode" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+    at stringify (<anonymous>) {
+  digest: '1772337279'
+}
+ ⨯ Error: Could not find the module "C:\Users\shiva\OneDrive\Desktop\portfolio\node_modules\next\dist\next-devtools\userspace\app\segment-explorer-node.js#SegmentViewNode" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+    at stringify (<anonymous>) {
+  digest: '1772337279'
+}
+ ⨯ TypeError: __webpack_modules__[moduleId] is not a function
+    at Object.__webpack_require__ [as require] (C:\Users\shiva\OneDrive\Desktop\portfolio\.next\server\webpack-runtime.js:25:42) {
+  digest: '1767466218'
+}
+ ⨯ Error: Could not find the module "C:\Users\shiva\OneDrive\Desktop\portfolio\node_modules\next\dist\next-devtools\userspace\app\segment-explorer-node.js#SegmentViewNode" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+    at stringify (<anonymous>) {
+  digest: '1772337279'
+}
+TypeError: __webpack_modules__[moduleId] is not a function
+    at Object.__webpack_require__ [as require] (C:\Users\shiva\OneDrive\Desktop\portfolio\.next\server\webpack-runtime.js:25:42)
+ ⨯ TypeError: __webpack_modules__[moduleId] is not a function
+    at Object.__webpack_require__ [as require] (C:\Users\shiva\OneDrive\Desktop\portfolio\.next\server\webpack-runtime.js:25:42)
+ ⨯ TypeError: __webpack_modules__[moduleId] is not a function
+    at Object.__webpack_require__ [as require] (C:\Users\shiva\OneDrive\Desktop\portfolio\.next\server\webpack-runtime.js:25:42)
+ ⨯ [Error: Cannot find module './611.js'
+Require stack:
+- C:\Users\shiva\OneDrive\Desktop\portfolio\.next\server\webpack-runtime.js
+- C:\Users\shiva\OneDrive\Desktop\portfolio\.next\server\pages\_document.js
+- C:\Users\shiva\OneDrive\Desktop\portfolio\node_modules\next\dist\server\require.js
+- C:\Users\shiva\OneDrive\Desktop\portfolio\node_modules\next\dist\server\next-server.js
+- C:\Users\shiva\OneDrive\Desktop\portfolio\node_modules\next\dist\server\next.js
+- C:\Users\shiva\OneDrive\Desktop\portfolio\node_modules\next\dist\server\lib\start-server.js
+- C:\Users\shiva\OneDrive\Desktop\portfolio\node_modules\next\dist\cli\next-start.js] {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}

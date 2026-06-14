@@ -26,9 +26,21 @@ export function FeaturedProjectsSection() {
         </motion.div>
       </div>
 
-      <div className="mt-4">
+      {/* Project chapters with editorial dividers between them */}
+      <div className="mt-4" role="list">
         {featuredProjects.map((project, index) => (
-          <ProjectShowcase key={project.title} project={project} index={index} />
+          <div key={project.title} role="listitem">
+            {/* Editorial divider between projects */}
+            {index > 0 && (
+              <div className="mx-auto max-w-7xl px-6 py-4 sm:px-8 lg:px-12">
+                <div className="project-divider" aria-hidden="true" />
+                <p className="mt-4 text-center font-mono text-[0.6rem] uppercase tracking-[0.3em] text-slate-600">
+                  {String(index + 1).padStart(2, '0')} / {String(featuredProjects.length).padStart(2, '0')}
+                </p>
+              </div>
+            )}
+            <ProjectShowcase project={project} index={index} />
+          </div>
         ))}
       </div>
     </section>

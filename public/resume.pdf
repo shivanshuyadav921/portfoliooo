@@ -1,0 +1,133 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 2416 >>
+stream
+BT
+/F2 20 Tf
+1 0 0 1 54 756 Tm
+(SHIVANSHU YADAV) Tj
+/F2 11 Tf
+1 0 0 1 54 730 Tm
+(Software Engineer | AI Researcher | Problem Solver) Tj
+/F1 9 Tf
+1 0 0 1 54 713 Tm
+(shivanshuy921@gmail.com | +91 9129590751) Tj
+/F1 9 Tf
+1 0 0 1 54 698 Tm
+(github.com/shivanshuyadav921 | linkedin.com/in/shivanshu-yadav-49364b3ba) Tj
+/F1 6 Tf
+1 0 0 1 54 683 Tm
+() Tj
+/F2 11 Tf
+1 0 0 1 54 676 Tm
+(EDUCATION) Tj
+/F2 10 Tf
+1 0 0 1 54 659 Tm
+(Vellore Institute of Technology \(VIT\), Vellore) Tj
+/F1 9 Tf
+1 0 0 1 54 643 Tm
+(B.Tech, Computer Science and Engineering \(Data Science\)) Tj
+/F1 9 Tf
+1 0 0 1 54 628 Tm
+(August 2024 - May 2028 | CGPA: 7.87 / 10) Tj
+/F1 5 Tf
+1 0 0 1 54 613 Tm
+() Tj
+/F2 11 Tf
+1 0 0 1 54 606 Tm
+(RESEARCH) Tj
+/F2 10 Tf
+1 0 0 1 54 589 Tm
+(Undergraduate Researcher - NLP & Formal Language Theory) Tj
+/F1 9 Tf
+1 0 0 1 54 573 Tm
+(Interests: Explainable AI, Multilingual NLP, Semantic Parsing, RAG, Trustworthy AI,) Tj
+/F1 9 Tf
+1 0 0 1 54 558 Tm
+(and Low-Resource Language Evaluation) Tj
+/F1 3 Tf
+1 0 0 1 54 543 Tm
+() Tj
+/F2 10 Tf
+1 0 0 1 54 536 Tm
+(Probabilistic Tree Transducers for Syntax-to-Semantics Conversion) Tj
+/F1 9 Tf
+1 0 0 1 54 520 Tm
+(Shivanshu Yadav & Tarun T. | Published May 2026) Tj
+/F1 9 Tf
+1 0 0 1 54 505 Tm
+(DOI: 10.5281/zenodo.20437981) Tj
+/F1 9 Tf
+1 0 0 1 54 490 Tm
+(Designed a probabilistic tree transducer framework; achieved 78.4% exact match on) Tj
+/F1 9 Tf
+1 0 0 1 54 475 Tm
+(GeoQuery and 74.1% on ATIS; evaluated GeoQuery, ATIS, and WikiSQL.) Tj
+/F1 5 Tf
+1 0 0 1 54 460 Tm
+() Tj
+/F2 11 Tf
+1 0 0 1 54 453 Tm
+(SELECTED PROJECTS) Tj
+/F2 10 Tf
+1 0 0 1 54 436 Tm
+(Flowint - AI-Powered Interview Preparation Platform) Tj
+/F1 9 Tf
+1 0 0 1 54 420 Tm
+(Python, FastAPI, Next.js, PostgreSQL, Docker, ChromaDB, OpenAI, Gemini, Groq) Tj
+/F2 9 Tf
+1 0 0 1 54 405 Tm
+(AlgoVerse - Interactive DSA Learning Platform | React, TypeScript, Node.js) Tj
+/F2 9 Tf
+1 0 0 1 54 390 Tm
+(Sign Language Detector | Python, TensorFlow, Keras, OpenCV) Tj
+/F1 9 Tf
+1 0 0 1 54 375 Tm
+(8,000+ images | 26 ASL characters | 93.2% accuracy | Real-time inference) Tj
+/F2 9 Tf
+1 0 0 1 54 360 Tm
+(GraphSpace - Open Source Contribution | Python, React, GitHub Workflows) Tj
+/F1 5 Tf
+1 0 0 1 54 345 Tm
+() Tj
+/F2 11 Tf
+1 0 0 1 54 338 Tm
+(ACHIEVEMENTS) Tj
+/F1 9 Tf
+1 0 0 1 54 321 Tm
+(Samsung EnnovateX | Amazon Hackathon | Goldman Sachs Hackathon) Tj
+/F1 9 Tf
+1 0 0 1 54 306 Tm
+(100+ problems solved across LeetCode and HackerRank) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000002718 00000 n 
+0000002788 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+2863
+%%EOF

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://shivanshuyadav.dev/sitemap.xml

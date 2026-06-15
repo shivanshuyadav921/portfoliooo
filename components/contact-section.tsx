@@ -1,121 +1,151 @@
-'use client';
+'use client'
 
-import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowUpRight, Download, Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
-import { contactMethods, socialLinks } from '@/data/contact';
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { ArrowUpRight, Download, Github, Linkedin, Mail, Phone } from 'lucide-react'
+import { SITE } from '@/lib/constants'
+import { EASE } from '@/lib/animations'
 
-const ease = [0.22, 1, 0.36, 1] as const;
+const contactMethods = [
+  {
+    label: 'Email',
+    value: SITE.email,
+    href:  `mailto:${SITE.email}`,
+    Icon:  Mail,
+  },
+  {
+    label: 'Phone',
+    value: SITE.phone,
+    href:  `tel:+919129590751`,
+    Icon:  Phone,
+  },
+  {
+    label: 'GitHub',
+    value: 'shivanshuyadav921',
+    href:  SITE.github,
+    Icon:  Github,
+  },
+  {
+    label: 'LinkedIn',
+    value: 'Shivanshu Yadav',
+    href:  SITE.linkedin,
+    Icon:  Linkedin,
+  },
+]
 
 export function ContactSection() {
-  const reduceMotion = useReducedMotion();
+  const headerRef = useRef(null)
+  const inView    = useInView(headerRef, { once: true, margin: '-5%' })
 
   return (
-    <section id="contact" className="scroll-mt-24 border-t border-white/[0.08] py-24 sm:py-32">
-      <div className="mx-auto max-w-[92rem] px-4 sm:px-8 lg:px-12">
+    <section id="contact" className="py-24 md:py-36">
+      <div className="max-w-[1380px] mx-auto px-6 md:px-10 xl:px-20">
+
+        {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.28 }}
-          transition={{ duration: reduceMotion ? 0 : 0.45, ease }}
-          className="grid gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-end"
+          ref={headerRef}
+          initial={{ opacity: 0, y: 14 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: EASE.premium }}
+          className="mb-12 md:mb-16"
         >
-          <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-cyan-200/70">Contact</p>
-            <h2 className="editorial-serif mt-5 max-w-3xl text-5xl font-semibold tracking-tight text-white sm:text-6xl">
-              Let&apos;s build the next serious system.
-            </h2>
+          <div className="font-mono text-[10px] tracking-[0.2em] text-white/22 uppercase mb-3">
+            Contact
           </div>
-          <p className="max-w-xl text-base leading-8 text-slate-300 lg:justify-self-end">
-            If the work resonates, I&apos;m open to engineering roles, research conversations, and projects that need
-            careful thinking rather than loud presentation.
-          </p>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <h2
+              className="font-display font-semibold text-white/80 tracking-tight leading-none"
+              style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3rem)' }}
+            >
+              Let&apos;s build something serious.
+            </h2>
+            <p className="text-[14px] text-white/30 max-w-md leading-relaxed">
+              Open to engineering roles, research conversations, and projects that need careful thinking.
+            </p>
+          </div>
         </motion.div>
 
+        {/* Contact card */}
         <motion.div
-          initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.24 }}
-          transition={{ duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : 0.06, ease }}
-          className="mt-14 grid gap-10 rounded-[2rem] border border-white/[0.08] bg-[#060c17] p-6 sm:p-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:p-10"
+          viewport={{ once: true, margin: '-10%' }}
+          transition={{ duration: 0.55, ease: EASE.premium }}
+          className="rounded-2xl border border-white/[0.06] bg-white/[0.015] p-6 md:p-10"
         >
-          <div className="space-y-8">
-            <div className="border-b border-white/[0.08] pb-6">
-              <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Direct lines</p>
-              <p className="mt-4 max-w-xl text-lg leading-8 text-slate-300">
-                The fastest way to reach me is email. GitHub and LinkedIn are the easiest ways to see the work in
-                context.
+          <div className="grid md:grid-cols-2 gap-10 md:gap-16">
+            {/* Left — contact methods */}
+            <div className="space-y-5">
+              <p className="font-mono text-[9.5px] tracking-[0.18em] text-white/22 uppercase mb-6">
+                Direct lines
               </p>
-            </div>
-
-            <div className="space-y-4">
-              {contactMethods.map((method) => (
-                <a
-                  key={method.label}
-                  href={method.href}
-                  className="group flex items-center gap-4 rounded-[1.5rem] border border-white/[0.07] bg-white/[0.02] p-4 text-sm text-slate-200 transition hover:border-cyan-300/30 hover:bg-cyan-300/[0.04]"
-                >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/[0.06] bg-slate-950/80 text-cyan-300">
-                    {method.label === 'Email' ? (
-                      <Mail className="h-5 w-5" />
-                    ) : method.label === 'Phone' ? (
-                      <Phone className="h-5 w-5" />
-                    ) : method.label === 'GitHub' ? (
-                      <Github className="h-5 w-5" />
-                    ) : method.label === 'LinkedIn' ? (
-                      <Linkedin className="h-5 w-5" />
-                    ) : (
-                      <MapPin className="h-5 w-5" />
+              {contactMethods.map(({ label, value, href, Icon }) => {
+                const external = href.startsWith('http')
+                return (
+                  <a
+                    key={label}
+                    href={href}
+                    target={external ? '_blank' : undefined}
+                    rel={external ? 'noopener noreferrer' : undefined}
+                    className="group flex items-center gap-4 p-4 -mx-4 rounded-xl hover:bg-white/[0.025] transition-colors duration-200"
+                  >
+                    <div className="w-10 h-10 rounded-lg border border-white/[0.06] bg-white/[0.02] flex items-center justify-center text-white/25 group-hover:text-white/50 transition-colors duration-200">
+                      <Icon className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="font-mono text-[10px] text-white/18 tracking-[0.08em] uppercase">
+                        {label}
+                      </p>
+                      <p className="text-[14px] text-white/50 group-hover:text-white/75 transition-colors duration-200 mt-0.5">
+                        {value}
+                      </p>
+                    </div>
+                    {external && (
+                      <ArrowUpRight className="w-3.5 h-3.5 text-white/10 group-hover:text-white/30 ml-auto transition-colors duration-200" />
                     )}
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-xs uppercase tracking-[0.24em] text-slate-500">{method.label}</p>
-                    <p className="mt-1 break-words text-sm font-medium text-slate-100">{method.displayValue}</p>
-                  </div>
-                </a>
-              ))}
+                  </a>
+                )
+              })}
             </div>
 
-            <div className="flex flex-wrap gap-3">
-              <a
-                href="/resume.pdf"
-                download="Shivanshu-Yadav-Resume.pdf"
-                className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-slate-950 transition hover:bg-cyan-100"
-              >
-                <Download className="h-4 w-4" />
-                Resume
-              </a>
-              <a
-                href="mailto:shivanshuy921@gmail.com"
-                className="inline-flex min-h-11 items-center gap-2 rounded-full border border-slate-700 px-5 text-sm font-semibold text-slate-200 transition hover:border-cyan-300/35 hover:text-white"
-              >
-                Send email
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
-            </div>
-          </div>
+            {/* Right — CTA + availability */}
+            <div className="flex flex-col justify-between">
+              <div>
+                <p className="font-mono text-[9.5px] tracking-[0.18em] text-white/22 uppercase mb-6">
+                  Availability
+                </p>
+                <p className="text-[15px] text-white/38 leading-[1.75] mb-4">
+                  Currently seeking <span className="text-white/60">summer 2025 internships</span> and{' '}
+                  <span className="text-white/60">research collaborations</span> in NLP, explainable AI,
+                  and production ML systems.
+                </p>
+                <p className="text-[14px] text-white/25 leading-relaxed">
+                  Based in Vellore, India. Open to remote work and relocation.
+                </p>
+              </div>
 
-          <div className="border-t border-white/[0.08] pt-0 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-            <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Social</p>
-            <div className="mt-6 space-y-4">
-              {socialLinks.map((social) => (
+              <div className="flex flex-wrap gap-3 mt-8">
                 <a
-                  key={social.platform}
-                  href={social.href}
-                  target={social.href.startsWith('http') ? '_blank' : undefined}
-                  rel={social.href.startsWith('http') ? 'noreferrer' : undefined}
-                  className="group flex items-center justify-between rounded-[1.5rem] border border-white/[0.07] bg-white/[0.02] p-4 text-sm text-slate-200 transition hover:border-cyan-300/30 hover:bg-cyan-300/[0.04]"
+                  href={`mailto:${SITE.email}`}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white/[0.07] hover:bg-white/[0.12] border border-white/[0.08] hover:border-white/[0.16] text-[14px] font-medium text-white/80 hover:text-white transition-all duration-250"
                 >
-                  <div>
-                    <p className="font-semibold text-white">{social.platform}</p>
-                    <p className="mt-1 text-slate-400">{social.label}</p>
-                  </div>
-                  <ArrowUpRight className="h-4 w-4 text-slate-500 transition group-hover:text-cyan-200" />
+                  <Mail className="w-[14px] h-[14px]" />
+                  Send email
                 </a>
-              ))}
+                <a
+                  href={SITE.resume}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-[14px] font-medium text-white/30 hover:text-white/65 border border-white/[0.06] hover:border-white/[0.12] transition-all duration-250"
+                >
+                  <Download className="w-[14px] h-[14px]" />
+                  Resume
+                </a>
+              </div>
             </div>
           </div>
         </motion.div>
       </div>
     </section>
-  );
+  )
 }

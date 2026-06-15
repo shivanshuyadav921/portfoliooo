@@ -62,12 +62,7 @@ export function PortfolioPage() {
       </header>
 
       <main id="main-content">
-        <div className="relative">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-[34rem] bg-[radial-gradient(circle_at_18%_12%,rgba(56,189,248,0.13),transparent_34%),radial-gradient(circle_at_84%_8%,rgba(99,102,241,0.08),transparent_28%)]" />
-          <div className="relative mx-auto max-w-[92rem] px-4 sm:px-8 lg:px-12">
-            <HeroSection />
-          </div>
-        </div>
+        <HeroSection />
 
         <SectionReveal>
           <FeaturedProjectsSection />

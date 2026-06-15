@@ -26,6 +26,42 @@ export type ProjectItem = {
 
 export const featuredProjects: ProjectItem[] = [
   {
+    title: 'TraceRAG',
+    subtitle: 'Explainable retrieval for technical question answering.',
+    description:
+      'An agentic retrieval-augmented generation system that treats traces as first-class evidence instead of hiding retrieval, ranking, and grounding behind a single answer.',
+    challenge:
+      'RAG systems often sound confident while making it difficult to inspect why documents were retrieved, how they were ranked, or whether the final answer stayed grounded.',
+    architecture:
+      'A staged pipeline emits structured trace records across retrieval, ranking, and answer grounding so every response can be audited back to source evidence.',
+    decision:
+      'Expose the reasoning surface directly in the product layer, making the answer and its evidence pathway part of the same user experience.',
+    proof:
+      'The system is published as a research artifact and paired with a public DOI record, making both the concept and implementation direction easy to inspect.',
+    technologies: ['Python', 'FastAPI', 'ChromaDB', 'PostgreSQL', 'LLM Evaluation'],
+    highlights: [
+      'Trace records for retrieval, ranking, and grounding.',
+      'Evidence-first answer format for technical users.',
+      'Designed around auditability at inference time.',
+      'Research artifact with public DOI trail.',
+    ],
+    impact: [
+      'Moved technical QA from answer-only output toward inspectable reasoning.',
+      'Made failure analysis possible by preserving the path between question, evidence, and response.',
+    ],
+    buttons: [{ label: 'Publication Record', href: 'https://zenodo.org/records/20542423', variant: 'primary' }],
+    visualLabel: 'Trace pathways',
+    visualVariant: 'pipeline',
+    visualImage: '/story/interpretable-ai-pathways.png',
+    visualAlt: 'Interpretable AI pathway visualization showing connected evidence routes and trace structures.',
+    visualIntent: 'A trustworthy answer is not a sentence alone; it is the visible path from question to evidence.',
+    visualStats: [
+      { label: 'Trace layers', value: '03' },
+      { label: 'Method', value: 'RAG' },
+      { label: 'Record', value: 'DOI' },
+    ],
+  },
+  {
     title: 'Flowint',
     subtitle: 'Interview preparation that stays grounded in evidence.',
     description:

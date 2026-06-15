@@ -43,7 +43,7 @@ function ChapterLine({
   );
 }
 
-function ProjectVisual({ project }: { project: ProjectItem }) {
+export function ProjectVisual({ project }: { project: ProjectItem }) {
   if (project.visualVariant === 'graph' || !project.visualImage) {
     return (
       <div className="relative overflow-hidden rounded-[2rem] border border-white/[0.08] bg-[#060c17]">

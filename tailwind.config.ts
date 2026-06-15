@@ -1,21 +1,25 @@
-import type { Config } from 'tailwindcss';
+import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: ['./app/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans:    ['var(--font-inter)', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['var(--font-inter)', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        serif:   ['var(--font-playfair)', 'Palatino Linotype', 'Book Antiqua', 'Georgia', 'serif'],
       },
-      boxShadow: {
-        glow: '0 18px 60px rgba(56, 189, 248, 0.16)',
+      colors: {
+        violet: {
+          DEFAULT: '#7c3aed',
+        },
       },
-      backgroundImage: {
-        'radial-soft': 'radial-gradient(circle at top, rgba(56,189,248,0.16), transparent 32%)',
+      transitionDuration: {
+        '250': '250ms',
       },
     },
   },
   plugins: [],
-};
+}
 
-export default config;
+export default config

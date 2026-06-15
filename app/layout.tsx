@@ -1,7 +1,24 @@
-import type { Metadata } from 'next';
-import './globals.css';
+import type { Metadata } from 'next'
+import { Inter, Playfair_Display } from 'next/font/google'
+import './globals.css'
 
-const siteUrl = new URL('https://shivanshuyadav.dev');
+/* ── Fonts ───────────────────────────────────────────────────────────────── */
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+  display: 'swap',
+})
+
+/* ── Metadata ────────────────────────────────────────────────────────────── */
+
+const siteUrl = new URL('https://shivanshuyadav.dev')
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
@@ -45,7 +62,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteUrl.toString(),
   },
-};
+}
+
+/* ── Structured Data ─────────────────────────────────────────────────────── */
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -74,12 +93,14 @@ const structuredData = {
       author: { '@id': `${siteUrl}#person` },
     },
   ],
-};
+}
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <body className="font-sans antialiased">
         {children}
         <script
           type="application/ld+json"
@@ -87,5 +108,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </body>
     </html>
-  );
+  )
 }

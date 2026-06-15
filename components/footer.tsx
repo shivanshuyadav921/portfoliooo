@@ -1,45 +1,59 @@
-import { Github, Linkedin, Mail } from 'lucide-react';
+'use client'
 
-const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Journey', href: '#journey' },
-  { label: 'Contact', href: '#contact' },
-];
+import { Github, Linkedin, Mail } from 'lucide-react'
+import { SITE, NAV_LINKS } from '@/lib/constants'
 
 export function Footer() {
-  const year = new Date().getFullYear();
+  const year = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-slate-800/80 bg-slate-950/90 py-10 text-slate-400">
-      <div className="mx-auto flex max-w-7xl flex-col gap-10 px-6 sm:px-8 lg:px-12 lg:flex-row lg:items-center lg:justify-between">
-        <div>
-          <p className="text-sm font-semibold text-slate-100">&copy; {year} Shivanshu Yadav. All rights reserved.</p>
-          <p className="mt-2 text-sm text-slate-400">Building reliable software and trustworthy AI systems.</p>
-        </div>
+    <footer className="border-t border-white/[0.04] py-12">
+      <div className="max-w-[1380px] mx-auto px-6 md:px-10 xl:px-20">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+          {/* Left */}
+          <div>
+            <a href="#home" className="font-display font-bold text-[17px] tracking-tight text-white/60 hover:text-white/80 transition-colors duration-200">
+              SY<span className="text-[var(--c-violet)]">.</span>
+            </a>
+            <p className="mt-2 font-mono text-[11px] text-white/15 tracking-[0.06em]">
+              &copy; {year} {SITE.name}. Building reliable software and trustworthy AI systems.
+            </p>
+          </div>
 
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-10">
-          <div className="flex flex-wrap gap-4">
-            {navLinks.map((link) => (
-              <a key={link.label} href={link.href} className="text-sm text-slate-400 transition hover:text-cyan-300">
+          {/* Center — nav links */}
+          <nav className="flex flex-wrap items-center gap-6">
+            {NAV_LINKS.map(link => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="font-mono text-[11px] text-white/18 hover:text-white/50 transition-colors duration-200 tracking-[0.06em]"
+              >
                 {link.label}
               </a>
             ))}
-          </div>
-          <div className="flex items-center gap-4 text-slate-400">
-            <a href="https://github.com/shivanshuyadav921" target="_blank" rel="noreferrer" aria-label="GitHub">
-              <Github className="h-5 w-5 transition hover:text-cyan-300" />
-            </a>
-            <a href="https://www.linkedin.com/in/shivanshu-yadav-49364b3ba" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-              <Linkedin className="h-5 w-5 transition hover:text-cyan-300" />
-            </a>
-            <a href="mailto:shivanshuy921@gmail.com" aria-label="Email">
-              <Mail className="h-5 w-5 transition hover:text-cyan-300" />
-            </a>
+          </nav>
+
+          {/* Right — social icons */}
+          <div className="flex items-center gap-5">
+            {[
+              { href: SITE.github,             Icon: Github,   label: 'GitHub'   },
+              { href: SITE.linkedin,           Icon: Linkedin, label: 'LinkedIn' },
+              { href: `mailto:${SITE.email}`,  Icon: Mail,     label: 'Email'    },
+            ].map(({ href, Icon, label }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith('mailto') ? undefined : '_blank'}
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="text-white/15 hover:text-white/45 transition-colors duration-200"
+              >
+                <Icon className="w-4 h-4" />
+              </a>
+            ))}
           </div>
         </div>
       </div>
     </footer>
-  );
+  )
 }

@@ -1,91 +1,127 @@
-'use client';
+'use client'
 
-import { motion, useReducedMotion } from 'framer-motion';
-import { journeyTimeline } from '@/data/timeline';
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { TIMELINE } from '@/lib/constants'
+import { EASE } from '@/lib/animations'
+import { cn } from '@/lib/utils'
 
-const ease = [0.22, 1, 0.36, 1] as const;
+const typeColor: Record<string, string> = {
+  education: 'text-sky-400/60',
+  research:  'text-violet-400/60',
+  work:      'text-emerald-400/60',
+}
 
-export function JourneySection() {
-  const reduceMotion = useReducedMotion();
+const typeDot: Record<string, string> = {
+  education: 'bg-sky-400/60',
+  research:  'bg-violet-400/60',
+  work:      'bg-emerald-400/60',
+}
+
+function TimelineEntry({ item, index }: { item: typeof TIMELINE[number]; index: number }) {
+  const ref    = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-10%' })
 
   return (
-    <section id="journey" className="scroll-mt-24 border-t border-white/[0.08] py-24 sm:py-32">
-      <div className="mx-auto max-w-[92rem] px-4 sm:px-8 lg:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.28 }}
-          transition={{ duration: reduceMotion ? 0 : 0.45, ease }}
-          className="grid gap-8 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-end"
+    <motion.article
+      ref={ref}
+      initial={{ opacity: 0, y: 14 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.55, ease: EASE.premium, delay: index * 0.1 }}
+      className="relative pl-8 md:pl-12 pb-12 last:pb-0"
+    >
+      {/* Timeline line */}
+      <div className="absolute left-[11px] md:left-[19px] top-[10px] bottom-0 w-px bg-white/[0.06]" />
+
+      {/* Dot */}
+      <div className={cn(
+        'absolute left-[7px] md:left-[15px] top-[6px] w-[9px] h-[9px] rounded-full border-2 border-[#050508]',
+        typeDot[item.type]
+      )} />
+
+      {/* Content */}
+      <div>
+        {/* Type + Duration */}
+        <div className="flex flex-wrap items-center gap-3 mb-3">
+          <span className={cn('font-mono text-[10px] tracking-[0.14em] uppercase', typeColor[item.type])}>
+            {item.type}
+          </span>
+          <span className="font-mono text-[10px] text-white/18">
+            {item.duration}
+          </span>
+          {item.location && (
+            <span className="font-mono text-[10px] text-white/12">
+              {item.location}
+            </span>
+          )}
+        </div>
+
+        {/* Organisation */}
+        <h3
+          className="font-display font-semibold text-white/70 tracking-tight leading-tight mb-1"
+          style={{ fontSize: 'clamp(1.05rem, 1.8vw, 1.35rem)' }}
         >
-          <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-cyan-200/70">Journey</p>
-            <h2 className="editorial-serif mt-5 max-w-3xl text-5xl font-semibold tracking-tight text-white sm:text-6xl">
-              A timeline of judgment.
-            </h2>
+          {item.organisation}
+        </h3>
+
+        {/* Role */}
+        <p className="font-mono text-[12px] text-white/30 mb-4">
+          {item.role}
+        </p>
+
+        {/* Description */}
+        <p className="text-[14px] text-white/38 leading-[1.75] mb-4 max-w-2xl">
+          {item.description}
+        </p>
+
+        {/* Highlights */}
+        <ul className="space-y-1.5">
+          {item.highlights.map(h => (
+            <li key={h} className="flex items-start gap-2 text-[13px] text-white/30 leading-relaxed">
+              <span className="mt-[7px] w-1 h-1 rounded-full bg-white/15 shrink-0" />
+              {h}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.article>
+  )
+}
+
+export function JourneySection() {
+  const headerRef = useRef(null)
+  const inView    = useInView(headerRef, { once: true, margin: '-5%' })
+
+  return (
+    <section id="journey" className="py-24 md:py-36">
+      <div className="max-w-[1380px] mx-auto px-6 md:px-10 xl:px-20">
+
+        {/* Section header */}
+        <motion.div
+          ref={headerRef}
+          initial={{ opacity: 0, y: 14 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: EASE.premium }}
+          className="mb-12 md:mb-16"
+        >
+          <div className="font-mono text-[10px] tracking-[0.2em] text-white/22 uppercase mb-3">
+            Journey
           </div>
-          <p className="max-w-xl text-base leading-8 text-slate-300 lg:justify-self-end">
-            The timeline stays intentionally spare. It shows how education, research, and project work are starting
-            to converge into a single practice of building serious systems.
-          </p>
+          <h2
+            className="font-display font-semibold text-white/80 tracking-tight leading-none"
+            style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3rem)' }}
+          >
+            Where I&apos;ve been.
+          </h2>
         </motion.div>
 
-        <div className="mt-14 space-y-12">
-          {journeyTimeline.map((section, sectionIndex) => (
-            <motion.div
-              key={section.sectionTitle}
-              initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.22 }}
-              transition={{ duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : sectionIndex * 0.04, ease }}
-              className="grid gap-8 lg:grid-cols-[minmax(0,0.34fr)_minmax(0,0.66fr)] lg:gap-12"
-            >
-              <div className="border-t border-white/[0.08] pt-5">
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{section.sectionTitle}</p>
-                {section.sectionRole ? (
-                  <p className="mt-4 max-w-md text-base leading-8 text-slate-300">{section.sectionRole}</p>
-                ) : null}
-              </div>
-
-              <div className="space-y-8">
-                {section.entries.map((entry) => (
-                  <article key={entry.id} className="border-t border-white/[0.08] pt-5">
-                    <div className="flex flex-wrap items-start justify-between gap-4">
-                      <div>
-                        <p className="text-[0.62rem] uppercase tracking-[0.28em] text-cyan-200/70">{entry.period}</p>
-                        <h3 className="editorial-serif mt-3 text-3xl font-semibold tracking-tight text-white">
-                          {entry.title}
-                        </h3>
-                        {entry.role ? <p className="mt-3 text-sm text-slate-400">{entry.role}</p> : null}
-                      </div>
-                      {entry.tags ? (
-                        <div className="flex flex-wrap gap-2">
-                          {entry.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="rounded-full border border-slate-800/90 bg-slate-900/35 px-3 py-1.5 text-xs text-slate-300"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      ) : null}
-                    </div>
-
-                    <div className="mt-5 space-y-3">
-                      {entry.details.map((detail) => (
-                        <p key={detail} className="max-w-3xl text-sm leading-7 text-slate-300">
-                          {detail}
-                        </p>
-                      ))}
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </motion.div>
+        {/* Timeline */}
+        <div className="max-w-3xl">
+          {TIMELINE.map((item, i) => (
+            <TimelineEntry key={item.id} item={item} index={i} />
           ))}
         </div>
       </div>
     </section>
-  );
+  )
 }

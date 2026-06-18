@@ -5,10 +5,11 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans:    ['var(--font-inter)', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['var(--font-inter)', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        serif:   ['var(--font-playfair)', 'Palatino Linotype', 'Book Antiqua', 'Georgia', 'serif'],
+        sans: ['var(--font-kanit)', 'Kanit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['var(--font-kanit)', 'Kanit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        serif: ['ui-serif', 'Georgia', 'serif'],
       },
+
       colors: {
         violet: {
           DEFAULT: '#7c3aed',

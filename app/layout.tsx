@@ -1,20 +1,16 @@
 import type { Metadata } from 'next'
-import { Inter, Playfair_Display } from 'next/font/google'
+import { Kanit } from 'next/font/google'
 import './globals.css'
 
 /* ── Fonts ───────────────────────────────────────────────────────────────── */
 
-const inter = Inter({
+const kanit = Kanit({
   subsets: ['latin'],
-  variable: '--font-inter',
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-kanit',
   display: 'swap',
 })
 
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-playfair',
-  display: 'swap',
-})
 
 /* ── Metadata ────────────────────────────────────────────────────────────── */
 
@@ -99,7 +95,7 @@ const structuredData = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" className={kanit.variable}>
       <body className="font-sans antialiased">
         {children}
         <script
@@ -110,3 +106,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   )
 }
+

@@ -8,12 +8,13 @@
   color-scheme: dark;
 
   /* Core palette */
-  --c-bg:       #050508;
-  --c-surface:  #0a0a10;
+  --c-bg:       #0C0C0C;
+  --c-surface:  #0C0C0C;
   --c-violet:   #7c3aed;
   --c-sky:      #0ea5e9;
   --c-emerald:  #34d399;
   --c-amber:    #f59e0b;
+
 
   /* Typography */
   font-synthesis: none;
@@ -34,12 +35,19 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body,
+#root,
+main {
+  background: #0C0C0C;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: var(--c-bg);
-  color: #e2e8f0;
+  color: #D7E2EA;
 }
+
 
 /* ── Subtle grid overlay ─────────────────────────────────────────────────── */
 
@@ -86,13 +94,16 @@ button, input, textarea, select {
 
 /* ── Utility classes ─────────────────────────────────────────────────────── */
 
+.hero-heading {
+  background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .editorial-balance {
   text-wrap: balance;
 }
 
-.editorial-serif {
-  font-family: var(--font-playfair), 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
-}
 
 .stat-display {
   font-variant-numeric: tabular-nums;
